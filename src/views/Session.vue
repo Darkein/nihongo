@@ -20,13 +20,15 @@ import {
 } from '../content/lessons'
 import type { Exercice } from '../content/schema'
 import { aReviser } from '../srs/leitner'
-import { aujourdhui, enregistrer, progression } from '../srs/store'
+import { noteDe } from '../srs/avancement'
+import { aujourdhui, enregistrer, noterTest, progression } from '../srs/store'
 
 const route = useRoute()
 const { mode, lecon, type } = route.query as Record<string, string | undefined>
 const lesson = lecon ? lessonParId(lecon) : undefined
 const estTest = type === 'minitest' || type === 'blanc'
 const cle = route.fullPath
+const notePrecedente = estTest && lesson ? noteDe(`${lesson.id}/${type}`) : undefined
 const NOMS: Record<string, string> = {
   ...Object.fromEntries(ACTIVITES.map((a) => [a.type, a.nom.toLowerCase()])),
   minitest: 'mini-test',
@@ -96,7 +98,7 @@ function fini(juste: boolean) {
   if (!carte.value.id.startsWith('blanc/')) enregistrer(carte.value.id, juste)
   index.value++
   memoriser()
-  if (index.value === cartes.length && estTest && lesson) progression.tests[`${lesson.id}/${type}`] = { note: note.value, date: aujourdhui() }
+  if (index.value === cartes.length && estTest && lesson) noterTest(`${lesson.id}/${type}`, note.value)
 }
 
 function recommencer() {
@@ -153,11 +155,12 @@ function recommencer() {
         <p class="ou"><span>{{ titre }}</span></p>
         <p v-if="estTest" class="note">{{ note }}<small>/10</small></p>
         <h1>{{ justes }} juste{{ justes > 1 ? 's' : '' }} sur {{ cartes.length }}</h1>
+        <p v-if="notePrecedente">Note précédente : {{ notePrecedente }}</p>
         <p v-if="justes < cartes.length">Les cartes ratées reviendront demain dans la révision du jour.</p>
       </template>
       <h1 v-else>Rien à faire dans cette série</h1>
       <RouterLink class="bouton primaire" :to="sortie">Terminer</RouterLink>
-      <button v-if="cartes.length" type="button" @click="recommencer">Recommencer</button>
+      <button v-if="cartes.length" type="button" @click="recommencer">{{ type === 'blanc' ? 'Nouveau tirage' : 'Recommencer' }}</button>
     </section>
   </div>
 </template>
