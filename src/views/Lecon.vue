@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import Chevron from '../components/Chevron.vue'
 import Devoirs from '../components/Devoirs.vue'
-import Jauge from '../components/Jauge.vue'
-import { ACTIVITES, enTete, lessonParId } from '../content/lessons'
+import JpText from '../components/JpText.vue'
+import { ACTIVITES, devoirsDe, enTete, filigrane, lessonParId, vedette } from '../content/lessons'
 import { avancement, etatTest, lienTest } from '../srs/avancement'
 import { progression } from '../srs/store'
 
@@ -10,59 +10,59 @@ const props = defineProps<{ id: string }>()
 const lesson = lessonParId(props.id)
 const lien = (type: string) => `/session?lecon=${props.id}&type=${type}`
 const enCours = (type: string) => progression.session?.retour === lien(type)
+const enDevoir = (type: string) =>
+  !!lesson && devoirsDe(lesson).some((d) => (d.activites as string[]).includes(type) && !progression.devoirs.includes(d.cle))
+// Circonférence de l'anneau d'avancement (rayon 26).
+const TOUR = 2 * Math.PI * 26
 </script>
 
 <template>
   <p v-if="!lesson">Leçon introuvable.</p>
   <template v-else>
-    <span class="filigrane" aria-hidden="true">{{ lesson.kana[0]?.[0] }}</span>
+    <span class="filigrane" aria-hidden="true">{{ filigrane(lesson) }}</span>
     <RouterLink class="retour" to="/lecons"><Chevron gauche />Leçons</RouterLink>
-    <header class="affiche">
-      <p class="sur">{{ enTete(lesson) }}</p>
-      <h1>{{ lesson.titre }}</h1>
-      <p class="ligne"><span>{{ avancement(lesson).pct }} % acquis</span></p>
-      <Jauge :pct="avancement(lesson).pct" />
+    <header class="tete-lecon">
+      <div>
+        <p class="sur">{{ enTete(lesson) }}</p>
+        <h1>{{ lesson.titre }}</h1>
+      </div>
+      <svg class="anneau" viewBox="0 0 62 62" role="img" :aria-label="`${avancement(lesson).pct} % acquis`">
+        <circle cx="31" cy="31" r="26" />
+        <circle v-if="avancement(lesson).pct" cx="31" cy="31" r="26" class="plein" :stroke-dasharray="`${(avancement(lesson).pct / 100) * TOUR} ${TOUR}`" />
+        <text x="31" y="36">{{ avancement(lesson).pct }}%</text>
+      </svg>
     </header>
 
-    <h2>Activités</h2>
-    <div class="activites">
-      <RouterLink v-for="a in ACTIVITES" :key="a.type" :to="lien(a.type)">
-        <span class="corps">
-          <span class="ligne"><strong>{{ a.nom }}</strong><span>{{ enCours(a.type) ? 'En cours' : avancement(lesson, a.type).texte }}</span></span>
-          <Jauge :pct="avancement(lesson, a.type).pct" />
+    <RouterLink class="bloc-cours" :to="`/lecon/${lesson.id}/resume`">
+      <span class="ligne"><strong>Relire le cours</strong><span class="fleche"><Chevron /></span></span>
+      <small>{{ lesson.resume.map((s) => s.titre).join(', ') }}<template v-if="lesson.liens?.length"> · {{ lesson.liens.length }} liens</template></small>
+      <span class="vedette"><JpText :texte="vedette(lesson)" /></span>
+    </RouterLink>
+
+    <h2>Apprentissage</h2>
+    <div class="tuiles">
+      <RouterLink v-for="a in ACTIVITES" :key="a.type" class="tuile-etat" :class="{ fait: avancement(lesson, a.type).pct === 100 }" :to="lien(a.type)">
+        <span class="repere" aria-hidden="true">{{ a.repere }}</span>
+        <b>{{ a.nom }}</b>
+        <span class="ligne compte">
+          <strong>{{ avancement(lesson, a.type).fait }}<small> / {{ avancement(lesson, a.type).total }}</small></strong>
+          <span v-if="enCours(a.type)" class="marqueur">En cours</span>
+          <span v-else-if="enDevoir(a.type)" class="marqueur devoir">Devoir</span>
         </span>
       </RouterLink>
     </div>
+    <RouterLink v-if="lesson.miniTest" class="pilule secondaire" :to="lienTest(lesson.id, 'minitest')">
+      <span>Mini-test du cours<small>{{ etatTest(lesson.id, 'minitest').etat }}<template v-if="etatTest(lesson.id, 'minitest').detail"> · {{ etatTest(lesson.id, 'minitest').detail }}</template></small></span>
+      <span class="fleche"><Chevron /></span>
+    </RouterLink>
+    <RouterLink class="pilule secondaire" :to="lienTest(lesson.id, 'blanc')">
+      <span>Mini-test blanc<small>{{ etatTest(lesson.id, 'blanc').etat }}<template v-if="etatTest(lesson.id, 'blanc').detail"> · {{ etatTest(lesson.id, 'blanc').detail }}</template></small></span>
+      <span class="fleche"><Chevron /></span>
+    </RouterLink>
 
-    <h2>Mini-tests</h2>
-    <div class="activites">
-      <RouterLink v-if="lesson.miniTest" :to="lienTest(lesson.id, 'minitest')">
-        <span class="corps">
-          <span class="ligne"><strong>Mini-test du cours</strong><span>{{ etatTest(lesson.id, 'minitest').etat }}</span></span>
-          <small>Celui passé en classe, {{ lesson.miniTest.length }} questions</small>
-          <small v-if="etatTest(lesson.id, 'minitest').detail">{{ etatTest(lesson.id, 'minitest').detail }}</small>
-        </span>
-      </RouterLink>
-      <RouterLink :to="lienTest(lesson.id, 'blanc')">
-        <span class="corps">
-          <span class="ligne"><strong>Mini-test blanc</strong><span>{{ etatTest(lesson.id, 'blanc').etat }}</span></span>
-          <small>Nouveau tirage à chaque fois, au même format</small>
-          <small v-if="etatTest(lesson.id, 'blanc').detail">{{ etatTest(lesson.id, 'blanc').detail }}</small>
-        </span>
-      </RouterLink>
-    </div>
-
-    <h2>Le cours</h2>
-    <div class="activites">
-      <RouterLink :to="`/lecon/${lesson.id}/resume`">
-        <span class="corps">
-          <span class="ligne"><strong>Résumé, kana et vocabulaire</strong><Chevron /></span>
-          <small>{{ lesson.resume.map((s) => s.titre).join(', ') }}</small>
-        </span>
-      </RouterLink>
-    </div>
-
-    <h2>Devoirs donnés à ce cours</h2>
-    <Devoirs :lesson="lesson" />
+    <template v-if="lesson.prochainCours.annonce.length || lesson.prochainCours.devoirs.length">
+      <h2>Devoirs</h2>
+      <Devoirs :lesson="lesson" />
+    </template>
   </template>
 </template>
