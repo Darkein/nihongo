@@ -879,6 +879,32 @@ button:disabled {
   border-color: var(--faux);
   text-decoration: line-through;
 }
+/* Compter */
+.activites a.pas-vu .pastille {
+  background: none;
+  color: var(--encre);
+  box-shadow: inset 0 0 0 2px var(--trait);
+}
+.nombre-kana {
+  font-size: clamp(1.8rem, 9vw, 3rem);
+  overflow-wrap: anywhere;
+}
+.ecouter {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+.reponse-nombre {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.reponse-nombre small {
+  font-weight: 600;
+}
 input.saisie {
   width: 100%;
   min-height: 60px;

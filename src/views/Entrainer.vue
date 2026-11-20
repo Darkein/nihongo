@@ -35,6 +35,12 @@ const blancs = computed(() => [...lessons].reverse().map((l) => ({ l, ...etatTes
         <small>Lecture et tracé, sans compter pour la révision</small>
       </span>
     </RouterLink>
+    <RouterLink to="/entrainer/nombres">
+      <span class="corps">
+        <span class="ligne"><strong>Compter</strong><Chevron /></span>
+        <small>Écrire, lire et écouter les nombres, à ton niveau</small>
+      </span>
+    </RouterLink>
   </div>
 
   <h2>Mini-tests blancs</h2>
