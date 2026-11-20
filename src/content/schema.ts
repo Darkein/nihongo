@@ -50,6 +50,10 @@ export const LessonSchema = z.strictObject({
   id: z.string().regex(/^cours-\d{2}$/),
   date: z.iso.date().optional(),
   titre: texte,
+  // Ce qui représente la leçon en tête de page (phrase clé, kanji) ; à défaut, ses kana ou ses premiers mots.
+  vedette: texte.optional(),
+  // Grand caractère vertical en fond de page : un caractère, deux au plus.
+  filigrane: z.string().min(1).max(2).optional(),
   kana: z.array(texte),
   resume: z.array(z.strictObject({ titre: texte, points: z.array(texte).min(1) })),
   liens: z.array(z.strictObject({ titre: texte, url: z.url() })).optional(),

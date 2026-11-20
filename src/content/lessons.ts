@@ -13,11 +13,17 @@ export const dateDe = (l: Lesson) =>
   l.date ? new Date(l.date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }) : ''
 export const enTete = (l: Lesson) => [`Cours ${numero(l)}`, dateDe(l)].filter(Boolean).join(', ')
 
-export const ACTIVITES: { type: Categorie; nom: string }[] = [
-  { type: 'kana', nom: 'Kana' },
-  { type: 'trace', nom: 'Tracé' },
-  { type: 'vocabulaire', nom: 'Vocabulaire' },
-  { type: 'exercices', nom: 'Exercices' },
+export const vedette = (l: Lesson) => {
+  const hiragana = l.kana.filter((k) => isHiragana(k))
+  return l.vedette ?? ((hiragana.length ? hiragana : l.kana).join(' ') || l.mots.slice(0, 3).map((m) => m.jp).join('・'))
+}
+export const filigrane = (l: Lesson) => l.filigrane ?? l.kana[0]?.[0] ?? ''
+
+export const ACTIVITES: { type: Categorie; nom: string; repere: string }[] = [
+  { type: 'kana', nom: 'Kana', repere: 'あ' },
+  { type: 'trace', nom: 'Tracé', repere: '筆' },
+  { type: 'vocabulaire', nom: 'Vocabulaire', repere: '語' },
+  { type: 'exercices', nom: 'Exercices', repere: '問' },
 ]
 
 export type Categorie = 'kana' | 'trace' | 'vocabulaire' | 'exercices' | 'minitest'

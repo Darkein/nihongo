@@ -20,6 +20,8 @@ Transforme les pièces jointes au prompt en `content/lessons/cours-NN/lesson.jso
 3. Remplis la leçon :
    - `date` : date du cours (pas celle de l'e-mail), au format `AAAA-MM-JJ`.
    - `kana` : une chaîne par ligne apprise, hiragana et katakana séparés (`"はひふへほ"`, `"ハヒフヘホ"`). Flashcards et tracés en sont dérivés.
+   - `vedette` (facultatif) : ce qui représente la leçon en tête de page, une phrase clé ou les kanji vus (`"しつれいですが、おいくつですか。"`). À remplir quand la leçon n'introduit pas de kana ; sinon, laisse-le vide : les hiragana de la leçon s'affichent.
+   - `filigrane` (facultatif) : le grand caractère vertical en fond de page. Garde-le le plus court possible : un seul caractère, deux au maximum. Sans lui, c'est le premier kana de la leçon.
    - `resume` : sections courtes reprenant le plan du récap.
    - `mots` : tout le vocabulaire cité, `jp` tel qu'enseigné. Kanji uniquement avec furigana : `{会社員|かいしゃいん}`.
    - `exercices` : au moins 2 `qcm`, 2 `saisie` et 2 `tuiles` portant sur la grammaire et le vocabulaire du cours. Les exercices du manuel deviennent des `transformation` (`serie` = nom de l'exercice, `exemple` = l'exemple du livre, un exercice par numéro) ; les tableaux de personnages vont dans `fiches`, sans les illustrations.
