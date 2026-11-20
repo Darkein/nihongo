@@ -1,0 +1,92 @@
+{
+  "id": "cours-05",
+  "date": "2026-11-17",
+  "titre": "Lignes YA et RA, l'âge et la politesse",
+  "kana": ["やゆよ", "らりるれろ", "ヤユヨ", "ラリルレロ"],
+  "resume": [
+    {
+      "titre": "Nouveaux caractères",
+      "points": [
+        "Ligne YA : や・ゆ・よ / ヤ・ユ・ヨ.",
+        "Ligne RA : ら・り・る・れ・ろ / ラ・リ・ル・レ・ロ.",
+        "Le « r » japonais est doux : la pointe de la langue tape juste derrière les dents du haut, pas dans la gorge."
+      ]
+    },
+    {
+      "titre": "Expression de politesse",
+      "points": [
+        "しつれいですが、おなまえは？ — Excusez-moi, quel est votre nom ?",
+        "しつれいですが、おいくつですか。 — Excusez-moi, quel âge avez-vous ?",
+        "おいくつ est la forme polie de いくつ (« combien »).",
+        "Le préfixe お adoucit le ton : なまえ → おなまえ, いくつ → おいくつ."
+      ]
+    },
+    {
+      "titre": "Dire l'âge",
+      "points": [
+        "Nombre + さい : にじゅうはっさい (28 ans). On demande なんさいですか。",
+        "Exceptions : いっさい (1 an), はっさい (8 ans), じゅっさい (10 ans).",
+        "20 ans se dit はたち, un mot à part.",
+        "Pour le numéro d'un exercice : 1ばん, 2ばん, 3ばん. いちばん veut aussi dire « le meilleur »."
+      ]
+    },
+    {
+      "titre": "Culture",
+      "points": [
+        "Autrefois le son « e » se prononçait légèrement « ye » : d'où Yen, Yebisu et Yedo (ancien nom de Tokyo).",
+        "せいじんしき (seijin shiki), la cérémonie de la majorité, célèbre les 20 ans.",
+        "La majorité civile est à 18 ans, mais l'alcool et le tabac restent interdits avant 20 ans.",
+        "Les jeunes femmes y portent souvent un furisode, kimono à manches longues réservé aux célibataires."
+      ]
+    }
+  ],
+  "liens": [
+    { "titre": "Gojūon (tableau des kana)", "url": "https://fr.wikipedia.org/wiki/Goj%C5%ABon" },
+    { "titre": "Seijin shiki (vidéo)", "url": "https://www.youtube.com/watch?v=FDYS4PGpw_Q" },
+    { "titre": "Furisode et tomesode", "url": "https://www.hareginomarusho.co.jp/contents/furisode/577/" },
+    { "titre": "Kyary Pamyu Pamyu — « Furisodation »", "url": "https://www.youtube.com/watch?v=9Y6H-YjsE9Q" }
+  ],
+  "mots": [
+    { "id": "yama", "jp": "やま", "fr": "montagne" },
+    { "id": "yuki", "jp": "ゆき", "fr": "neige" },
+    { "id": "yoru", "jp": "よる", "fr": "nuit" },
+    { "id": "kuruma", "jp": "くるま", "fr": "voiture" },
+    { "id": "tori", "jp": "とり", "fr": "oiseau" },
+    { "id": "ringo", "jp": "りんご", "fr": "pomme" },
+    { "id": "shitsurei", "jp": "しつれいですが", "fr": "Excusez-moi, mais…" },
+    { "id": "onamae", "jp": "おなまえ", "fr": "votre nom (poli)" },
+    { "id": "oikutsu", "jp": "おいくつ", "fr": "quel âge (poli)" },
+    { "id": "nansai", "jp": "{何歳|なんさい}", "fr": "quel âge" },
+    { "id": "nenrei", "jp": "ねんれい", "fr": "âge" },
+    { "id": "issai", "jp": "いっさい", "fr": "1 an" },
+    { "id": "hassai", "jp": "はっさい", "fr": "8 ans" },
+    { "id": "jussai", "jp": "じゅっさい", "fr": "10 ans" },
+    { "id": "hatachi", "jp": "はたち", "fr": "20 ans" },
+    { "id": "ichiban", "jp": "いちばん", "fr": "numéro 1 ; le meilleur" },
+    { "id": "shukudai", "jp": "しゅくだい", "fr": "devoirs" },
+    { "id": "seijinshiki", "jp": "せいじんしき", "fr": "cérémonie de la majorité" }
+  ],
+  "fiches": [
+    { "nom": "ミラー", "pays": "アメリカ", "metier": "{会社員|かいしゃいん}", "age": 28 },
+    { "nom": "{山田|やまだ}", "pays": "{日本|にほん}", "metier": "{銀行員|ぎんこういん}", "age": 38 },
+    { "nom": "ワット", "pays": "イギリス", "metier": "{先生|せんせい}", "age": 45 },
+    { "nom": "タワポン", "pays": "タイ", "metier": "{学生|がくせい}", "age": 19 },
+    { "nom": "シュミット", "pays": "ドイツ", "metier": "{会社員|かいしゃいん}", "age": 52 }
+  ],
+  "exercices": [
+    { "type": "qcm", "id": "vingt-ans", "question": "Comment dit-on « 20 ans » ?", "choix": ["にじゅっさい", "はたち", "にじゅうさい"], "reponse": 1 },
+    { "type": "qcm", "id": "prefixe-o", "question": "À quoi sert le préfixe お dans おなまえ ?", "choix": ["À poser une question", "À rendre le mot plus poli", "À marquer le pluriel"], "reponse": 1 },
+    { "type": "saisie", "id": "huit-ans", "question": "Écris « 8 ans » en hiragana.", "reponses": ["はっさい"] },
+    { "type": "saisie", "id": "un-an", "question": "Écris « 1 an » en hiragana.", "reponses": ["いっさい"] },
+    { "type": "saisie", "id": "dix-ans", "question": "Écris « 10 ans » en hiragana.", "reponses": ["じゅっさい"] },
+    { "type": "tuiles", "id": "quel-age-poli", "question": "Excusez-moi, quel âge avez-vous ?", "tuiles": ["しつれいですが、", "おいくつ", "ですか。"], "leurres": ["おなまえ", "は"] },
+    { "type": "transformation", "id": "b7-1", "serie": "練習B 7 — âge : question puis réponse", "exemple": "ミラーさん → ミラーさんは {何歳|なんさい}ですか。……28{歳|さい}です。", "enonce": "1) {山田|やまだ}さん", "reponses": ["やまださんは なんさいですか。さんじゅうはっさいです。", "やまださんは なんさいですか。38さいです。"] },
+    { "type": "transformation", "id": "b7-2", "serie": "練習B 7 — âge : question puis réponse", "exemple": "ミラーさん → ミラーさんは {何歳|なんさい}ですか。……28{歳|さい}です。", "enonce": "2) ワットさん", "reponses": ["ワットさんは なんさいですか。よんじゅうごさいです。", "ワットさんは なんさいですか。45さいです。"] },
+    { "type": "transformation", "id": "b7-3", "serie": "練習B 7 — âge : question puis réponse", "exemple": "ミラーさん → ミラーさんは {何歳|なんさい}ですか。……28{歳|さい}です。", "enonce": "3) タワポンさん", "reponses": ["タワポンさんは なんさいですか。じゅうきゅうさいです。", "タワポンさんは なんさいですか。19さいです。"] },
+    { "type": "transformation", "id": "b7-4", "serie": "練習B 7 — âge : question puis réponse", "exemple": "ミラーさん → ミラーさんは {何歳|なんさい}ですか。……28{歳|さい}です。", "enonce": "4) シュミットさん", "reponses": ["シュミットさんは なんさいですか。ごじゅうにさいです。", "シュミットさんは なんさいですか。52さいです。"] }
+  ],
+  "prochainCours": {
+    "annonce": [],
+    "devoirs": ["Pratiquer l'écriture et la lecture des lignes YA (やゆよ) et RA (らりるれろ) en hiragana et en katakana."]
+  }
+}

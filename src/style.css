@@ -1,0 +1,376 @@
+:root {
+  --papier: #f6f1e7;
+  --feuille: #fffdf8;
+  --encre: #23201c;
+  --gris: #6f685e;
+  --trait: #d9d0bf;
+  --accent: #b8322a;
+  --juste: #2f6b3f;
+  --jp: 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif JP', serif;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --papier: #1a1816;
+    --feuille: #24211e;
+    --encre: #efe8da;
+    --gris: #a59c8e;
+    --trait: #4a443c;
+    --accent: #e0655c;
+    --juste: #7cc08d;
+  }
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--papier);
+  color: var(--encre);
+  font: 17px/1.55 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+.entete,
+main {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+.entete {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: max(12px, env(safe-area-inset-top));
+  padding-bottom: 12px;
+}
+main {
+  padding-bottom: 48px;
+}
+a {
+  color: var(--accent);
+}
+.marque {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--encre);
+  text-decoration: none;
+}
+.sceau {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--jp);
+  border-radius: 4px;
+}
+h1 {
+  font-size: 1.5rem;
+  line-height: 1.25;
+  margin: 12px 0;
+  text-wrap: balance;
+}
+h2 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gris);
+  margin: 24px 0 8px;
+}
+h2 small {
+  text-transform: none;
+  letter-spacing: 0;
+}
+.bloc h2 {
+  margin-top: 0;
+}
+.bloc {
+  display: block;
+  background: var(--feuille);
+  border: 1px solid var(--trait);
+  border-radius: 10px;
+  padding: 16px;
+  margin: 12px 0;
+}
+.vedette {
+  border-top: 4px solid var(--accent);
+}
+ul {
+  margin: 0;
+  padding-left: 1.1em;
+}
+li + li {
+  margin-top: 6px;
+}
+.jp,
+.kana,
+input.saisie {
+  font-family: var(--jp);
+}
+.jp {
+  font-size: 1.12em;
+}
+rt {
+  font-size: 0.55em;
+  color: var(--gris);
+}
+.romaji {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--gris);
+}
+button,
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 8px 16px;
+  border: 1px solid var(--trait);
+  border-radius: 8px;
+  background: var(--feuille);
+  color: var(--encre);
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+button:disabled {
+  cursor: default;
+  opacity: 0.75;
+}
+.primaire {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+@media (prefers-color-scheme: dark) {
+  .primaire {
+    color: #1a1816;
+  }
+}
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.rangee {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.rangee > * {
+  flex: 1 1 auto;
+}
+.lien-lecon {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+}
+.lien-lecon small {
+  display: block;
+  color: var(--gris);
+}
+.numero {
+  font: 700 1.6rem var(--jp);
+  color: var(--accent);
+  min-width: 1.4em;
+  text-align: center;
+}
+.ligne-kana {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.kana {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--trait);
+  border-radius: 6px;
+  font-size: 1.5rem;
+  color: var(--encre);
+  text-decoration: none;
+}
+.mots {
+  list-style: none;
+  padding: 0;
+}
+.mots li {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 0;
+  margin: 0;
+  border-top: 1px solid var(--trait);
+}
+.son {
+  min-height: 40px;
+  width: 40px;
+  padding: 0;
+  border-radius: 50%;
+  color: var(--accent);
+  vertical-align: middle;
+}
+.fil {
+  color: var(--gris);
+  margin: 4px 0;
+}
+progress {
+  width: 100%;
+  height: 6px;
+  accent-color: var(--accent);
+}
+.exercice {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.exercice p,
+.exercice form {
+  margin: 0;
+}
+.exercice form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.question {
+  font-size: 1.15rem;
+}
+.serie,
+.exemple,
+.aide {
+  font-size: 0.9rem;
+  color: var(--gris);
+}
+.carte {
+  min-height: 9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+}
+.recto {
+  font-size: 1.3rem;
+}
+.grand {
+  font-family: var(--jp);
+  font-size: 2.6rem;
+  line-height: 1.5;
+}
+.verso {
+  color: var(--accent);
+}
+.choix {
+  display: grid;
+  gap: 8px;
+}
+.choix .juste {
+  border-color: var(--juste);
+  box-shadow: inset 0 0 0 2px var(--juste);
+}
+.choix .faux {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+input.saisie {
+  width: 100%;
+  min-height: 52px;
+  padding: 8px 12px;
+  font-size: 1.3rem;
+  border: 1px solid var(--trait);
+  border-radius: 8px;
+  background: var(--papier);
+  color: var(--encre);
+}
+.phrase,
+.reserve {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 56px;
+}
+.phrase {
+  padding: 8px;
+  border-bottom: 2px solid var(--encre);
+}
+.tuile {
+  min-height: 44px;
+  padding: 4px 12px;
+}
+.trace {
+  align-self: center;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 1;
+  background:
+    linear-gradient(var(--trait), var(--trait)) center / 1px 100% no-repeat,
+    linear-gradient(var(--trait), var(--trait)) center / 100% 1px no-repeat,
+    var(--papier);
+  border: 1px solid var(--trait);
+  border-radius: 8px;
+  touch-action: none;
+}
+.verdict {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 4px solid var(--accent);
+  background: var(--papier);
+}
+.verdict.juste {
+  border-left-color: var(--juste);
+}
+.verdict.juste strong {
+  color: var(--juste);
+}
+.verdict.faux strong {
+  color: var(--accent);
+}
+.fiches summary {
+  cursor: pointer;
+  color: var(--gris);
+  font-size: 0.9rem;
+}
+.defile {
+  overflow-x: auto;
+}
+.fiches table {
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+.fiches th,
+.fiches td {
+  padding: 6px 10px 2px 0;
+  text-align: left;
+  font-weight: 400;
+}
+.note {
+  font: 700 2.4rem var(--jp);
+  color: var(--accent);
+  margin: 0;
+}
+.interrupteur {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.interrupteur input {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--accent);
+}

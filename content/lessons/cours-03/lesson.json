@@ -1,0 +1,106 @@
+{
+  "id": "cours-03",
+  "date": "2026-11-03",
+  "titre": "Lignes TA et NA, professions, négation et questions",
+  "kana": ["たちつてと", "なにぬねの", "タチツテト", "ナニヌネノ", "だぢづでど"],
+  "resume": [
+    {
+      "titre": "Écriture et prononciation",
+      "points": [
+        "Nouvelles lignes : た (TA) et な (NA).",
+        "Sons voisés (dakuon, « tenten ») : だ・ぢ・づ・で・ど.",
+        "Attention aux tracés : tome (arrêt), hane (crochet), harai (balayage).",
+        "Partie reprise plus en détail au début du cours suivant."
+      ]
+    },
+    {
+      "titre": "Grammaire",
+      "points": [
+        "Forme négative : 〜じゃ（では） ありません — わたしは アメリカじんじゃ ありません。",
+        "Question : 〜ですか, avec une intonation montante.",
+        "だれですか : « Qui est-ce ? »",
+        "なんですか : « Qu'est-ce que c'est ? »",
+        "Exemple : かれは かしゅですか。 → いいえ、かしゅじゃ ありません。サッカーせんしゅです。"
+      ]
+    },
+    {
+      "titre": "Culture et jeu",
+      "points": [
+        "Jeu de devinettes sur des célébrités (Zidane, Macron, Miyazaki…).",
+        "Clin d'œil à Lille 2004 : l'artiste くさま やよい (Yayoi Kusama) et sa sculpture « Les Tulipes de Shangri-La » devant la gare Lille Europe."
+      ]
+    }
+  ],
+  "mots": [
+    { "id": "yuumeijin", "jp": "ゆうめいじん", "fr": "personne célèbre" },
+    { "id": "kashu", "jp": "かしゅ", "fr": "chanteur, chanteuse" },
+    { "id": "eigakantoku", "jp": "えいがかんとく", "fr": "réalisateur" },
+    { "id": "sakkaasenshu", "jp": "サッカーせんしゅ", "fr": "joueur de football" },
+    { "id": "haiyuu", "jp": "はいゆう", "fr": "acteur" },
+    { "id": "joyuu", "jp": "じょゆう", "fr": "actrice" },
+    { "id": "geijutsuka", "jp": "げいじゅつか", "fr": "artiste" },
+    { "id": "dare", "jp": "だれ", "fr": "qui" },
+    { "id": "nan", "jp": "なん", "fr": "quoi" },
+    { "id": "kare", "jp": "かれ", "fr": "il, lui" },
+    { "id": "iie", "jp": "いいえ", "fr": "non" },
+    { "id": "tani", "jp": "たに", "fr": "vallée" },
+    { "id": "inu", "jp": "いぬ", "fr": "chien" },
+    { "id": "neko", "jp": "ねこ", "fr": "chat" },
+    { "id": "natsu", "jp": "なつ", "fr": "été" },
+    { "id": "sakana", "jp": "さかな", "fr": "poisson" },
+    { "id": "tako", "jp": "たこ", "fr": "pieuvre" },
+    { "id": "chi", "jp": "ち", "fr": "sang" },
+    { "id": "kutsu", "jp": "くつ", "fr": "chaussures" },
+    { "id": "te", "jp": "て", "fr": "main" },
+    { "id": "tokei", "jp": "とけい", "fr": "montre, horloge" },
+    { "id": "naka", "jp": "なか", "fr": "intérieur" },
+    { "id": "niku", "jp": "にく", "fr": "viande" }
+  ],
+  "fiches": [
+    { "nom": "ミラー", "pays": "アメリカ", "metier": "{会社員|かいしゃいん}" },
+    { "nom": "{山田|やまだ}", "pays": "{日本|にほん}", "metier": "{銀行員|ぎんこういん}" },
+    { "nom": "ワット", "pays": "イギリス", "metier": "{先生|せんせい}" },
+    { "nom": "タワポン", "pays": "タイ", "metier": "{学生|がくせい}" },
+    { "nom": "シュミット", "pays": "ドイツ", "metier": "{会社員|かいしゃいん}" }
+  ],
+  "exercices": [
+    { "type": "qcm", "id": "qui-est-ce", "question": "Comment demande-t-on « Qui est-ce ? »", "choix": ["なんですか", "だれですか", "かしゅですか"], "reponse": 1 },
+    { "type": "saisie", "id": "est-il-chanteur", "question": "Écris « Est-ce qu'il est chanteur ? »", "reponses": ["かれは かしゅですか。"] },
+    { "type": "tuiles", "id": "non-footballeur", "question": "Non, il n'est pas chanteur. Il est joueur de football.", "tuiles": ["いいえ、", "かしゅじゃ", "ありません。", "サッカーせんしゅ", "です。"], "leurres": ["はい、", "はいゆう"] },
+    { "type": "saisie", "id": "pas-americain", "question": "Écris « Je ne suis pas américain(e) ».", "reponses": ["わたしは アメリカじんじゃ ありません。"] },
+    { "type": "transformation", "id": "b3-1", "serie": "練習B 3 — négation", "exemple": "ミラーさん・{銀行員|ぎんこういん} → ミラーさんは {銀行員|ぎんこういん}じゃ ありません。", "enonce": "1) {山田|やまだ}さん・{学生|がくせい}", "reponses": ["やまださんは がくせいじゃ ありません。"] },
+    { "type": "transformation", "id": "b3-2", "serie": "練習B 3 — négation", "exemple": "ミラーさん・{銀行員|ぎんこういん} → ミラーさんは {銀行員|ぎんこういん}じゃ ありません。", "enonce": "2) ワットさん・ドイツ{人|じん}", "reponses": ["ワットさんは ドイツじんじゃ ありません。"] },
+    { "type": "transformation", "id": "b3-3", "serie": "練習B 3 — négation", "exemple": "ミラーさん・{銀行員|ぎんこういん} → ミラーさんは {銀行員|ぎんこういん}じゃ ありません。", "enonce": "3) タワポンさん・{先生|せんせい}", "reponses": ["タワポンさんは せんせいじゃ ありません。"] },
+    { "type": "transformation", "id": "b3-4", "serie": "練習B 3 — négation", "exemple": "ミラーさん・{銀行員|ぎんこういん} → ミラーさんは {銀行員|ぎんこういん}じゃ ありません。", "enonce": "4) シュミットさん・アメリカ{人|じん}", "reponses": ["シュミットさんは アメリカじんじゃ ありません。"] },
+    { "type": "transformation", "id": "b4-1", "serie": "練習B 4 — question puis réponse", "exemple": "ミラーさん・{医者|いしゃ} → ミラーさんは {医者|いしゃ}ですか。……いいえ、{医者|いしゃ}じゃ ありません。", "enonce": "1) {山田|やまだ}さん・{銀行員|ぎんこういん}", "reponses": ["やまださんは ぎんこういんですか。はい、ぎんこういんです。"] },
+    { "type": "transformation", "id": "b4-2", "serie": "練習B 4 — question puis réponse", "exemple": "ミラーさん・{医者|いしゃ} → ミラーさんは {医者|いしゃ}ですか。……いいえ、{医者|いしゃ}じゃ ありません。", "enonce": "2) ワットさん・{会社員|かいしゃいん}", "reponses": ["ワットさんは かいしゃいんですか。いいえ、かいしゃいんじゃ ありません。"] },
+    { "type": "transformation", "id": "b4-3", "serie": "練習B 4 — question puis réponse", "exemple": "ミラーさん・{医者|いしゃ} → ミラーさんは {医者|いしゃ}ですか。……いいえ、{医者|いしゃ}じゃ ありません。", "enonce": "3) タワポンさん・{先生|せんせい}", "reponses": ["タワポンさんは せんせいですか。いいえ、せんせいじゃ ありません。"] },
+    { "type": "transformation", "id": "b4-4", "serie": "練習B 4 — question puis réponse", "exemple": "ミラーさん・{医者|いしゃ} → ミラーさんは {医者|いしゃ}ですか。……いいえ、{医者|いしゃ}じゃ ありません。", "enonce": "4) シュミットさん・ドイツ{人|じん}", "reponses": ["シュミットさんは ドイツじんですか。はい、ドイツじんです。"] }
+  ],
+  "miniTest": [
+    { "type": "saisie", "id": "mt-ta", "question": "Écris la prononciation en rōmaji : た", "attendu": "romaji", "reponses": ["た"] },
+    { "type": "saisie", "id": "mt-ni", "question": "Écris la prononciation en rōmaji : に", "attendu": "romaji", "reponses": ["に"] },
+    { "type": "saisie", "id": "mt-dzu", "question": "Écris la prononciation en rōmaji : づ", "attendu": "romaji", "reponses": ["づ"] },
+    { "type": "saisie", "id": "mt-ne", "question": "Écris la prononciation en rōmaji : ね", "attendu": "romaji", "reponses": ["ね"] },
+    { "type": "saisie", "id": "mt-tsu", "question": "Écris la prononciation en rōmaji : つ", "attendu": "romaji", "reponses": ["つ"] },
+    { "type": "saisie", "id": "mt-kata-ta", "question": "Écris le hiragana correspondant : タ", "reponses": ["た"] },
+    { "type": "saisie", "id": "mt-kata-na", "question": "Écris le hiragana correspondant : ナ", "reponses": ["な"] },
+    { "type": "saisie", "id": "mt-kata-de", "question": "Écris le hiragana correspondant : デ", "reponses": ["で"] },
+    { "type": "saisie", "id": "mt-kata-to", "question": "Écris le hiragana correspondant : ト", "reponses": ["と"] },
+    { "type": "saisie", "id": "mt-kata-no", "question": "Écris le hiragana correspondant : ノ", "reponses": ["の"] },
+    { "type": "saisie", "id": "mt-tani", "question": "Écris en rōmaji : たに (vallée)", "attendu": "romaji", "reponses": ["たに"] },
+    { "type": "saisie", "id": "mt-inu", "question": "Écris en rōmaji : いぬ (chien)", "attendu": "romaji", "reponses": ["いぬ"] },
+    { "type": "saisie", "id": "mt-neko", "question": "Écris en rōmaji : ねこ (chat)", "attendu": "romaji", "reponses": ["ねこ"] },
+    { "type": "saisie", "id": "mt-natsu", "question": "Écris en rōmaji : なつ (été)", "attendu": "romaji", "reponses": ["なつ"] },
+    { "type": "saisie", "id": "mt-sakana", "question": "Écris en rōmaji : さかな (poisson)", "attendu": "romaji", "reponses": ["さかな"] },
+    { "type": "qcm", "id": "mt-footballeur", "question": "Comment dit-on « Joueur de football » en japonais ?", "choix": ["かしゅ", "はいゆう", "サッカーせんしゅ"], "reponse": 2 }
+  ],
+  "prochainCours": {
+    "annonce": ["Reprise de la partie Écriture et prononciation (lignes TA et NA, sons voisés) au début du cours."],
+    "devoirs": [
+      "S'entraîner à écrire les lignes TA et NA en soignant les tracés (tome, hane, harai).",
+      "Faire les exercices de la page 10 du manuel rouge, si possible.",
+      "S'entraîner à la question-réponse : かれは かしゅですか。 → いいえ、かしゅじゃ ありません。サッカーせんしゅです。"
+    ]
+  }
+}

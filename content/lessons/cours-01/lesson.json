@@ -1,0 +1,85 @@
+{
+  "id": "cours-01",
+  "titre": "Découverte du japonais",
+  "kana": ["あいうえお", "アイウエオ"],
+  "resume": [
+    {
+      "titre": "Salutations et culture",
+      "points": [
+        "Les salutations : おはようございます (le matin), こんにちは (la journée), こんばんは (le soir).",
+        "L'inclinaison japonaise (ojigi) : on s'incline plus ou moins selon la situation.",
+        "Se présenter : はじめまして。わたしは 〜です。よろしく おねがいします。 — avec une légère inclinaison."
+      ]
+    },
+    {
+      "titre": "Écriture et prononciation",
+      "points": [
+        "Le rōmaji est la transcription du japonais en alphabet latin.",
+        "Premiers hiragana et katakana : あ・い・う・え・お / ア・イ・ウ・エ・オ.",
+        "Le « u » japonais se prononce lèvres peu arrondies, entre « ou » et « eu »."
+      ]
+    },
+    {
+      "titre": "Mots utiles en classe",
+      "points": [
+        "Consignes : みてください, きいてください, いってください, よんでください, かいてください.",
+        "Pour l'élève : わかりました, わかりません, もう いちど おねがいします, ゆっくり おねがいします, しつもんが あります."
+      ]
+    }
+  ],
+  "mots": [
+    { "id": "ohayou", "jp": "おはようございます", "fr": "Bonjour (le matin)" },
+    { "id": "konnichiwa", "jp": "こんにちは", "fr": "Bonjour (la journée)" },
+    { "id": "konbanwa", "jp": "こんばんは", "fr": "Bonsoir" },
+    { "id": "arigatou", "jp": "ありがとうございます", "fr": "Merci beaucoup" },
+    { "id": "hajimemashite", "jp": "はじめまして", "fr": "Enchanté(e)" },
+    { "id": "yoroshiku", "jp": "よろしく おねがいします", "fr": "Ravi(e) de faire votre connaissance" },
+    { "id": "watashi", "jp": "わたし", "fr": "je, moi" },
+    { "id": "ai", "jp": "あい", "fr": "amour" },
+    { "id": "ie", "jp": "いえ", "fr": "maison" },
+    { "id": "ue", "jp": "うえ", "fr": "haut, au-dessus" },
+    { "id": "e", "jp": "え", "fr": "dessin, image" },
+    { "id": "ao", "jp": "あお", "fr": "bleu" },
+    { "id": "mite", "jp": "みてください", "fr": "Regardez" },
+    { "id": "kiite", "jp": "きいてください", "fr": "Écoutez" },
+    { "id": "itte", "jp": "いってください", "fr": "Répétez / Dites" },
+    { "id": "yonde", "jp": "よんでください", "fr": "Lisez" },
+    { "id": "kaite", "jp": "かいてください", "fr": "Écrivez" },
+    { "id": "wakarimashita", "jp": "わかりました", "fr": "J'ai compris" },
+    { "id": "wakarimasen", "jp": "わかりません", "fr": "Je ne comprends pas" },
+    { "id": "mouichido", "jp": "もう いちど おねがいします", "fr": "Encore une fois, s'il vous plaît" },
+    { "id": "yukkuri", "jp": "ゆっくり おねがいします", "fr": "Plus lentement, s'il vous plaît" },
+    { "id": "shitsumon", "jp": "しつもんが あります", "fr": "J'ai une question" }
+  ],
+  "exercices": [
+    { "type": "qcm", "id": "soir", "question": "Il est 20h, tu croises un voisin. Que dis-tu ?", "choix": ["おはようございます", "こんにちは", "こんばんは"], "reponse": 2 },
+    { "type": "qcm", "id": "pas-compris", "question": "Tu n'as pas compris l'explication. Que dis-tu ?", "choix": ["わかりました", "わかりません", "はじめまして"], "reponse": 1 },
+    { "type": "saisie", "id": "enchante", "question": "Écris « Enchanté(e) » en hiragana.", "reponses": ["はじめまして"] },
+    { "type": "saisie", "id": "je", "question": "Écris « je, moi » en hiragana.", "reponses": ["わたし"] },
+    { "type": "tuiles", "id": "presentation", "question": "Enchanté(e). Je suis Marie. Ravi(e) de faire votre connaissance.", "tuiles": ["はじめまして。", "わたしは", "マリーです。", "よろしく", "おねがいします。"] }
+  ],
+  "miniTest": [
+    { "type": "saisie", "id": "mt-a", "question": "Écris la prononciation en rōmaji : あ", "attendu": "romaji", "reponses": ["あ"] },
+    { "type": "saisie", "id": "mt-i", "question": "Écris la prononciation en rōmaji : い", "attendu": "romaji", "reponses": ["い"] },
+    { "type": "saisie", "id": "mt-u", "question": "Écris la prononciation en rōmaji : う", "attendu": "romaji", "reponses": ["う"] },
+    { "type": "saisie", "id": "mt-e", "question": "Écris la prononciation en rōmaji : え", "attendu": "romaji", "reponses": ["え"] },
+    { "type": "saisie", "id": "mt-o", "question": "Écris la prononciation en rōmaji : お", "attendu": "romaji", "reponses": ["お"] },
+    { "type": "qcm", "id": "mt-ka", "question": "Quel hiragana correspond au katakana ア ?", "choix": ["う", "お", "あ", "い", "え"], "reponse": 2 },
+    { "type": "qcm", "id": "mt-ki", "question": "Quel hiragana correspond au katakana イ ?", "choix": ["う", "お", "あ", "い", "え"], "reponse": 3 },
+    { "type": "qcm", "id": "mt-ku", "question": "Quel hiragana correspond au katakana ウ ?", "choix": ["う", "お", "あ", "い", "え"], "reponse": 0 },
+    { "type": "qcm", "id": "mt-ke", "question": "Quel hiragana correspond au katakana エ ?", "choix": ["う", "お", "あ", "い", "え"], "reponse": 4 },
+    { "type": "qcm", "id": "mt-ko", "question": "Quel hiragana correspond au katakana オ ?", "choix": ["う", "お", "あ", "い", "え"], "reponse": 1 },
+    { "type": "saisie", "id": "mt-ai", "question": "Écris en rōmaji : あい (amour)", "attendu": "romaji", "reponses": ["あい"] },
+    { "type": "saisie", "id": "mt-ue", "question": "Écris en rōmaji : うえ (haut, au-dessus)", "attendu": "romaji", "reponses": ["うえ"] },
+    { "type": "qcm", "id": "mt-matin", "question": "Vous rencontrez votre professeur le matin (8h00).", "choix": ["こんにちは", "おはようございます", "ありがとうございます", "さようなら"], "reponse": 1 },
+    { "type": "qcm", "id": "mt-merci", "question": "Vous remerciez quelqu'un qui vous a aidé.", "choix": ["こんにちは", "おはようございます", "ありがとうございます", "さようなら"], "reponse": 2 },
+    { "type": "qcm", "id": "mt-apres-midi", "question": "Vous dites « Bonjour » à un ami l'après-midi (14h00).", "choix": ["こんにちは", "おはようございます", "ありがとうございます", "さようなら"], "reponse": 0 }
+  ],
+  "prochainCours": {
+    "annonce": [],
+    "devoirs": [
+      "S'entraîner à écrire les hiragana あ・い・う・え・お.",
+      "S'entraîner à se présenter à l'oral : はじめまして。わたしは 〜です。よろしく おねがいします。"
+    ]
+  }
+}

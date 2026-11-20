@@ -1,0 +1,111 @@
+{
+  "id": "cours-04",
+  "date": "2026-11-10",
+  "titre": "Lignes HA et MA, particules の・は・も, nombres jusqu'à 50",
+  "kana": ["はひふへほ", "まみむめも", "ハヒフヘホ", "マミムメモ", "ばびぶべぼ", "ぱぴぷぺぽ"],
+  "resume": [
+    {
+      "titre": "Phonétique",
+      "points": [
+        "Ligne H : は・ひ・ふ・へ・ほ. Le « h » s'expire, comme quand on souffle sur ses mains pour les réchauffer. はな (fleur, nez) ne se dit pas « ana ».",
+        "Tenten (dakuten) : ば・び・ぶ・べ・ぼ. Maru (handakuten) : ぱ・ぴ・ぷ・ぺ・ぽ.",
+        "Ligne M : ま・み・む・め・も."
+      ]
+    },
+    {
+      "titre": "La particule の",
+      "points": [
+        "Il n'y a pas de pronom possessif en japonais : on utilise の.",
+        "Possession : わたしの + nom (mon, ma, mes).",
+        "Appartenance : IMCの しゃいん (employé d'IMC) — わたしは IMCの しゃいんです。",
+        "Origine : フランスの ワイン (vin français).",
+        "« Tu » se traduit rarement : on emploie plutôt le prénom, souvent suivi de -chan ou -kun pour un proche."
+      ]
+    },
+    {
+      "titre": "Les particules は et も, et です",
+      "points": [
+        "Une particule est une étiquette placée après le mot qu'elle précise.",
+        "は, particule de thème, se prononce « wa » : « quant à… ». Ce n'est pas le verbe être.",
+        "です joue le rôle du verbe être : わたしは がくせいです。",
+        "あのかたは だれですか。 — « Cette personne, qui est-ce ? » On va du général au particulier.",
+        "も remplace は pour dire « aussi » : サントスさんは ブラジルじんです。マリアさんも ブラジルじんです。"
+      ]
+    },
+    {
+      "titre": "Les nombres jusqu'à 50",
+      "points": [
+        "De 11 à 19 : dix + unité — じゅういち (11), じゅうに (12).",
+        "Dizaines : chiffre + dix — にじゅう (20), さんじゅう (30).",
+        "21 = 2 × 10 + 1 : にじゅういち.",
+        "Deux lectures pour 4 (よん / し), 7 (なな / しち) et 9 (きゅう / く)."
+      ]
+    }
+  ],
+  "mots": [
+    { "id": "hana", "jp": "はな", "fr": "fleur ; nez" },
+    { "id": "pan", "jp": "パン", "fr": "pain" },
+    { "id": "koohii", "jp": "コーヒー", "fr": "café" },
+    { "id": "wain", "jp": "ワイン", "fr": "vin" },
+    { "id": "shain", "jp": "{社員|しゃいん}", "fr": "employé(e) d'une société" },
+    { "id": "anokata", "jp": "あのかた", "fr": "cette personne (poli)" },
+    { "id": "donata", "jp": "どなた", "fr": "qui (poli)" },
+    { "id": "kenkyuusha", "jp": "{研究者|けんきゅうしゃ}", "fr": "chercheur, chercheuse" },
+    { "id": "hito", "jp": "ひと", "fr": "personne" },
+    { "id": "fune", "jp": "ふね", "fr": "bateau" },
+    { "id": "hoshi", "jp": "ほし", "fr": "étoile" },
+    { "id": "uma", "jp": "うま", "fr": "cheval" },
+    { "id": "mimi", "jp": "みみ", "fr": "oreille" },
+    { "id": "mushi", "jp": "むし", "fr": "insecte" },
+    { "id": "me", "jp": "め", "fr": "œil" },
+    { "id": "momo", "jp": "もも", "fr": "pêche" },
+    { "id": "ichi", "jp": "いち", "fr": "1" },
+    { "id": "ni", "jp": "に", "fr": "2" },
+    { "id": "san", "jp": "さん", "fr": "3" },
+    { "id": "yon", "jp": "よん", "fr": "4 (aussi し)" },
+    { "id": "go", "jp": "ご", "fr": "5" },
+    { "id": "roku", "jp": "ろく", "fr": "6" },
+    { "id": "nana", "jp": "なな", "fr": "7 (aussi しち)" },
+    { "id": "hachi", "jp": "はち", "fr": "8" },
+    { "id": "kyuu", "jp": "きゅう", "fr": "9 (aussi く)" },
+    { "id": "juu", "jp": "じゅう", "fr": "10" }
+  ],
+  "fiches": [
+    { "nom": "ミラー", "pays": "アメリカ", "metier": "{会社員|かいしゃいん}" },
+    { "nom": "{山田|やまだ}", "pays": "{日本|にほん}", "metier": "{銀行員|ぎんこういん}" },
+    { "nom": "ワット", "pays": "イギリス", "metier": "{先生|せんせい}" },
+    { "nom": "タワポン", "pays": "タイ", "metier": "{学生|がくせい}" },
+    { "nom": "シュミット", "pays": "ドイツ", "metier": "{会社員|かいしゃいん}" },
+    { "nom": "グプタ", "pays": "インド", "metier": "{会社員|かいしゃいん}", "organisation": "IMC" },
+    { "nom": "イー", "pays": "{韓国|かんこく}", "metier": "{研究者|けんきゅうしゃ}", "organisation": "AKC" },
+    { "nom": "ワン", "pays": "{中国|ちゅうごく}", "metier": "{医者|いしゃ}", "organisation": "{神戸病院|こうべびょういん}" },
+    { "nom": "カリナ", "pays": "インドネシア", "metier": "{学生|がくせい}", "organisation": "{富士大学|ふじだいがく}" },
+    { "nom": "サントス", "pays": "ブラジル", "metier": "{会社員|かいしゃいん}", "organisation": "ブラジルエアー" }
+  ],
+  "exercices": [
+    { "type": "qcm", "id": "wa-prononciation", "question": "Comment se prononce は quand c'est une particule ?", "choix": ["ha", "wa", "ba"], "reponse": 1 },
+    { "type": "qcm", "id": "verbe-etre", "question": "Dans わたしは がくせいです, quel mot joue le rôle du verbe être ?", "choix": ["は", "わたし", "です"], "reponse": 2 },
+    { "type": "qcm", "id": "vin-francais", "question": "Comment dit-on « vin français » ?", "choix": ["ワインの フランス", "フランスの ワイン", "フランスは ワイン"], "reponse": 1 },
+    { "type": "tuiles", "id": "maria-aussi", "question": "Maria aussi est brésilienne.", "tuiles": ["マリアさん", "も", "ブラジルじん", "です。"], "leurres": ["は", "の"] },
+    { "type": "tuiles", "id": "employe-imc", "question": "Je suis employé d'IMC.", "tuiles": ["わたしは", "IMC", "の", "しゃいん", "です。"], "leurres": ["も"] },
+    { "type": "saisie", "id": "nombre-21", "question": "Écris 21 en hiragana.", "reponses": ["にじゅういち"] },
+    { "type": "saisie", "id": "nombre-34", "question": "Écris 34 en hiragana.", "reponses": ["さんじゅうよん", "さんじゅうし"] },
+    { "type": "saisie", "id": "nombre-50", "question": "Écris 50 en hiragana.", "reponses": ["ごじゅう"] },
+    { "type": "saisie", "id": "nombre-17", "question": "Écris 17 en hiragana.", "reponses": ["じゅうなな", "じゅうしち"] },
+    { "type": "tuiles", "id": "b5-1", "question": "練習B 5 — あの {方|かた}は どなたですか。 1) イー", "tuiles": ["イーさんです。", "AKC", "の", "{研究者|けんきゅうしゃ}です。"], "leurres": ["IMC", "{医者|いしゃ}です。"] },
+    { "type": "tuiles", "id": "b5-2", "question": "練習B 5 — あの {方|かた}は どなたですか。 2) ワン", "tuiles": ["ワンさんです。", "{神戸病院|こうべびょういん}", "の", "{医者|いしゃ}です。"], "leurres": ["{富士大学|ふじだいがく}", "{学生|がくせい}です。"] },
+    { "type": "tuiles", "id": "b5-3", "question": "練習B 5 — あの {方|かた}は どなたですか。 3) カリナ", "tuiles": ["カリナさんです。", "{富士大学|ふじだいがく}", "の", "{学生|がくせい}です。"], "leurres": ["{神戸病院|こうべびょういん}", "{先生|せんせい}です。"] },
+    { "type": "tuiles", "id": "b5-4", "question": "練習B 5 — あの {方|かた}は どなたですか。 4) サントス", "tuiles": ["サントスさんです。", "ブラジルエアー", "の", "{社員|しゃいん}です。"], "leurres": ["AKC", "{研究者|けんきゅうしゃ}です。"] },
+    { "type": "transformation", "id": "b6-1", "serie": "練習B 6 — も : question puis réponse", "exemple": "ミラーさん・アメリカ{人|じん}、グプタさん → グプタさんも アメリカ{人|じん}ですか。……いいえ、グプタさんは アメリカ{人|じん}じゃ ありません。", "enonce": "1) {山田|やまだ}さんは {銀行員|ぎんこういん}です。イーさん", "reponses": ["イーさんも ぎんこういんですか。いいえ、イーさんは ぎんこういんじゃ ありません。"] },
+    { "type": "transformation", "id": "b6-2", "serie": "練習B 6 — も : question puis réponse", "exemple": "ミラーさん・アメリカ{人|じん}、グプタさん → グプタさんも アメリカ{人|じん}ですか。……いいえ、グプタさんは アメリカ{人|じん}じゃ ありません。", "enonce": "2) ワットさんは {先生|せんせい}です。ワンさん", "reponses": ["ワンさんも せんせいですか。いいえ、ワンさんは せんせいじゃ ありません。"] },
+    { "type": "transformation", "id": "b6-3", "serie": "練習B 6 — も : question puis réponse", "exemple": "ミラーさん・アメリカ{人|じん}、グプタさん → グプタさんも アメリカ{人|じん}ですか。……いいえ、グプタさんは アメリカ{人|じん}じゃ ありません。", "enonce": "3) タワポンさんは {学生|がくせい}です。カリナさん", "reponses": ["カリナさんも がくせいですか。はい、カリナさんも がくせいです。"] },
+    { "type": "transformation", "id": "b6-4", "serie": "練習B 6 — も : question puis réponse", "exemple": "ミラーさん・アメリカ{人|じん}、グプタさん → グプタさんも アメリカ{人|じん}ですか。……いいえ、グプタさんは アメリカ{人|じん}じゃ ありません。", "enonce": "4) シュミットさんは ドイツ{人|じん}です。サントスさん", "reponses": ["サントスさんも ドイツじんですか。いいえ、サントスさんは ドイツじんじゃ ありません。"] }
+  ],
+  "prochainCours": {
+    "annonce": ["Les compteurs."],
+    "devoirs": [
+      "Apporter en classe la feuille sur les chiffres distribuée au cours.",
+      "Réviser les hiragana et katakana des lignes H, M, B et P."
+    ]
+  }
+}

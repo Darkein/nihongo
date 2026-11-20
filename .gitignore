@@ -1,0 +1,6 @@
+node_modules
+dist
+dev-dist
+inbox
+*.eml
+.DS_Store

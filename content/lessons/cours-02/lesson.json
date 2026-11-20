@@ -1,0 +1,103 @@
+{
+  "id": "cours-02",
+  "titre": "Révision et premières phrases",
+  "kana": ["かきくけこ", "さしすせそ", "カキクケコ", "サシスセソ", "がぎぐげご", "ざじずぜぞ"],
+  "resume": [
+    {
+      "titre": "Écriture et prononciation",
+      "points": [
+        "Lignes K et S : か・き・く・け・こ et さ・し・す・せ・そ, en hiragana et en katakana.",
+        "Les consonnes sonores se notent avec le dakuten ゛ : か → が, さ → ざ.",
+        "Attention à し (shi) et じ (ji)."
+      ]
+    },
+    {
+      "titre": "Langue et culture",
+      "points": [
+        "すみません sert à s'excuser, mais aussi à remercier quelqu'un qui nous consacre du temps ou nous rend service.",
+        "さようなら est un adieu qui suggère qu'on ne se reverra pas avant un certain temps."
+      ]
+    },
+    {
+      "titre": "Grammaire — leçon 1 du manuel",
+      "points": [
+        "La forme polie en です.",
+        "La phrase de base : わたしは 〜です (« Je suis… »).",
+        "Nationalité : pays + じん — アメリカじん, にほんじん.",
+        "On présente son nom, sa nationalité, sa profession et son âge."
+      ]
+    }
+  ],
+  "mots": [
+    { "id": "sumimasen", "jp": "すみません", "fr": "Excusez-moi / pardon / merci" },
+    { "id": "sayounara", "jp": "さようなら", "fr": "Au revoir (pour longtemps)" },
+    { "id": "gakusei", "jp": "{学生|がくせい}", "fr": "étudiant(e)" },
+    { "id": "sensei", "jp": "{先生|せんせい}", "fr": "professeur" },
+    { "id": "kaishain", "jp": "{会社員|かいしゃいん}", "fr": "employé(e) de bureau, salarié(e)" },
+    { "id": "ginkouin", "jp": "{銀行員|ぎんこういん}", "fr": "employé(e) de banque" },
+    { "id": "isha", "jp": "{医者|いしゃ}", "fr": "médecin" },
+    { "id": "nihonjin", "jp": "{日本人|にほんじん}", "fr": "japonais(e)" },
+    { "id": "furansujin", "jp": "フランス{人|じん}", "fr": "français(e)" },
+    { "id": "amerikajin", "jp": "アメリカ{人|じん}", "fr": "américain(e)" },
+    { "id": "eiga", "jp": "えいが", "fr": "film" },
+    { "id": "ojigi", "jp": "おじぎ", "fr": "inclinaison du corps" },
+    { "id": "kagi", "jp": "かぎ", "fr": "clé" },
+    { "id": "kao", "jp": "かお", "fr": "visage" },
+    { "id": "ki", "jp": "き", "fr": "arbre" },
+    { "id": "kuuki", "jp": "くうき", "fr": "air" },
+    { "id": "ike", "jp": "いけ", "fr": "étang" },
+    { "id": "koi", "jp": "こい", "fr": "carpe" },
+    { "id": "kasa", "jp": "かさ", "fr": "parapluie" },
+    { "id": "ashi", "jp": "あし", "fr": "pied, jambe" },
+    { "id": "isu", "jp": "いす", "fr": "chaise" },
+    { "id": "ase", "jp": "あせ", "fr": "sueur" },
+    { "id": "uso", "jp": "うそ", "fr": "mensonge" }
+  ],
+  "fiches": [
+    { "nom": "ミラー", "pays": "アメリカ", "metier": "{会社員|かいしゃいん}" },
+    { "nom": "{山田|やまだ}", "pays": "{日本|にほん}", "metier": "{銀行員|ぎんこういん}" },
+    { "nom": "ワット", "pays": "イギリス", "metier": "{先生|せんせい}" },
+    { "nom": "タワポン", "pays": "タイ", "metier": "{学生|がくせい}" },
+    { "nom": "シュミット", "pays": "ドイツ", "metier": "{会社員|かいしゃいん}" }
+  ],
+  "exercices": [
+    { "type": "qcm", "id": "sumimasen-sens", "question": "Quelqu'un te tient la porte. Quel mot peut aussi exprimer ta gratitude ?", "choix": ["さようなら", "すみません", "こんばんは"], "reponse": 1 },
+    { "type": "tuiles", "id": "je-suis-etudiant", "question": "Je suis étudiant.", "tuiles": ["わたしは", "がくせい", "です。"], "leurres": ["せんせい", "か"] },
+    { "type": "saisie", "id": "je-suis-francais", "question": "Écris « Je suis français(e) ».", "reponses": ["わたしは フランスじんです。"] },
+    { "type": "transformation", "id": "b1-1", "serie": "練習B 1 — nationalité", "exemple": "ミラーさん → ミラーさんは アメリカ{人|じん}です。", "enonce": "1) {山田|やまだ}さん", "reponses": ["やまださんは にほんじんです。"] },
+    { "type": "transformation", "id": "b1-2", "serie": "練習B 1 — nationalité", "exemple": "ミラーさん → ミラーさんは アメリカ{人|じん}です。", "enonce": "2) ワットさん", "reponses": ["ワットさんは イギリスじんです。"] },
+    { "type": "transformation", "id": "b1-3", "serie": "練習B 1 — nationalité", "exemple": "ミラーさん → ミラーさんは アメリカ{人|じん}です。", "enonce": "3) タワポンさん", "reponses": ["タワポンさんは タイじんです。"] },
+    { "type": "transformation", "id": "b1-4", "serie": "練習B 1 — nationalité", "exemple": "ミラーさん → ミラーさんは アメリカ{人|じん}です。", "enonce": "4) シュミットさん", "reponses": ["シュミットさんは ドイツじんです。"] },
+    { "type": "transformation", "id": "b2-1", "serie": "練習B 2 — profession", "exemple": "ミラーさん → ミラーさんは {会社員|かいしゃいん}です。", "enonce": "1) {山田|やまだ}さん", "reponses": ["やまださんは ぎんこういんです。"] },
+    { "type": "transformation", "id": "b2-2", "serie": "練習B 2 — profession", "exemple": "ミラーさん → ミラーさんは {会社員|かいしゃいん}です。", "enonce": "2) ワットさん", "reponses": ["ワットさんは せんせいです。"] },
+    { "type": "transformation", "id": "b2-3", "serie": "練習B 2 — profession", "exemple": "ミラーさん → ミラーさんは {会社員|かいしゃいん}です。", "enonce": "3) タワポンさん", "reponses": ["タワポンさんは がくせいです。"] },
+    { "type": "transformation", "id": "b2-4", "serie": "練習B 2 — profession", "exemple": "ミラーさん → ミラーさんは {会社員|かいしゃいん}です。", "enonce": "4) シュミットさん", "reponses": ["シュミットさんは かいしゃいんです。"] }
+  ],
+  "miniTest": [
+    { "type": "saisie", "id": "mt-ki", "question": "Écris la prononciation en rōmaji : き", "attendu": "romaji", "reponses": ["き"] },
+    { "type": "saisie", "id": "mt-sa", "question": "Écris la prononciation en rōmaji : さ", "attendu": "romaji", "reponses": ["さ"] },
+    { "type": "saisie", "id": "mt-ku", "question": "Écris la prononciation en rōmaji : く", "attendu": "romaji", "reponses": ["く"] },
+    { "type": "saisie", "id": "mt-se", "question": "Écris la prononciation en rōmaji : せ", "attendu": "romaji", "reponses": ["せ"] },
+    { "type": "saisie", "id": "mt-ko", "question": "Écris la prononciation en rōmaji : こ", "attendu": "romaji", "reponses": ["こ"] },
+    { "type": "saisie", "id": "mt-kata-ki", "question": "Écris le hiragana correspondant : キ", "reponses": ["き"] },
+    { "type": "saisie", "id": "mt-kata-su", "question": "Écris le hiragana correspondant : ス", "reponses": ["す"] },
+    { "type": "saisie", "id": "mt-kata-se", "question": "Écris le hiragana correspondant : セ", "reponses": ["せ"] },
+    { "type": "saisie", "id": "mt-kata-ka", "question": "Écris le hiragana correspondant : カ", "reponses": ["か"] },
+    { "type": "saisie", "id": "mt-kata-ko", "question": "Écris le hiragana correspondant : コ", "reponses": ["こ"] },
+    { "type": "saisie", "id": "mt-eiga", "question": "Écris en rōmaji : えいが (film)", "attendu": "romaji", "reponses": ["えいが"] },
+    { "type": "saisie", "id": "mt-ojigi", "question": "Écris en rōmaji : おじぎ (inclinaison du corps)", "attendu": "romaji", "reponses": ["おじぎ"] },
+    { "type": "saisie", "id": "mt-kagi", "question": "Écris en rōmaji : かぎ (clé)", "attendu": "romaji", "reponses": ["かぎ"] },
+    { "type": "qcm", "id": "mt-etudiant", "question": "Étudiant(e)", "choix": ["がくせい", "せんせい", "わたし", "かいしゃいん"], "reponse": 0 },
+    { "type": "qcm", "id": "mt-je", "question": "Je", "choix": ["がくせい", "せんせい", "わたし", "かいしゃいん"], "reponse": 2 },
+    { "type": "qcm", "id": "mt-salarie", "question": "Employé(e) de bureau / Salarié(e)", "choix": ["がくせい", "せんせい", "わたし", "かいしゃいん"], "reponse": 3 }
+  ],
+  "prochainCours": {
+    "annonce": [
+      "Mini-test de 5 à 10 minutes en début de cours, à corriger soi-même : lire des hiragana et écrire leur rōmaji, puis lire des mots en rōmaji et les écrire en hiragana."
+    ],
+    "devoirs": [
+      "Exercices d'écriture sur les lignes K et S.",
+      "Préparer une courte présentation orale d'une personnalité connue : nom, profession, nationalité, âge."
+    ]
+  }
+}
