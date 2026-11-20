@@ -1025,15 +1025,17 @@ h2 + .sous-titre {
   width: min(80%, 18rem);
   scroll-snap-align: start;
   padding: 16px 16px 8px;
+  border: var(--trait-epais);
   border-radius: 20px;
-  background: var(--encre);
-  color: var(--fond);
+  background: light-dark(#fff, var(--surface));
+  color: var(--encre);
 }
 .frise .geant {
   top: -18px;
   right: -10px;
   font-size: 96px;
-  color: color-mix(in srgb, var(--fond) 8%, transparent);
+  color: var(--jaune-marque);
+  opacity: 0.25;
 }
 .frise .ligne {
   position: relative;
@@ -1041,7 +1043,7 @@ h2 + .sous-titre {
 }
 .frise .ligne > span {
   font-weight: 700;
-  color: color-mix(in srgb, var(--fond) 70%, transparent);
+  color: var(--doux);
 }
 .frise .titre {
   position: relative;
@@ -1061,7 +1063,7 @@ h2 + .sous-titre {
   align-items: center;
   gap: 12px;
   padding: 10px 0;
-  border-top: 1px solid color-mix(in srgb, var(--fond) 18%, transparent);
+  border-top: 1px solid var(--trait);
   text-decoration: none;
 }
 .frise .corps {
@@ -1072,7 +1074,7 @@ h2 + .sous-titre {
   white-space: nowrap;
   text-overflow: ellipsis;
   font-size: 14px;
-  color: color-mix(in srgb, var(--fond) 70%, transparent);
+  color: var(--doux);
 }
 .repere {
   flex: none;
@@ -1240,5 +1242,20 @@ h2 + .sous-titre {
   }
   .grille-lecons .carte-lecon {
     margin: 0;
+  }
+  /* La place ne manque pas : les cours à consolider passent en grille, sans défilement. */
+  .frise {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+  }
+  .frise > li {
+    width: auto;
+  }
+  .defiler {
+    display: none;
   }
 }
