@@ -992,6 +992,32 @@ h2 + .sous-titre {
 .frise::-webkit-scrollbar {
   display: none;
 }
+.cadre-frise {
+  position: relative;
+}
+.defiler {
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .defiler {
+    position: absolute;
+    top: 50%;
+    left: -8px;
+    translate: 0 -50%;
+    display: grid;
+    width: 44px;
+    height: 44px;
+    min-height: 0;
+    padding: 0;
+    border-radius: 50%;
+    color: var(--encre);
+    background: var(--fond);
+  }
+  .defiler.suivant {
+    left: auto;
+    right: -8px;
+  }
+}
 .frise > li {
   position: relative;
   overflow: hidden;

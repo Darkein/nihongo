@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import Chevron from '../components/Chevron.vue'
 import Devoirs from '../components/Devoirs.vue'
 import EnTete from '../components/EnTete.vue'
@@ -85,6 +85,20 @@ const rattrapages = computed(() =>
     })
     .filter((r) => r.trous.length),
 )
+
+// Sans écran tactile ni trackpad, rien ne fait défiler la frise : des flèches prennent le relais.
+const frise = ref<HTMLElement>()
+const bords = ref({ debut: true, fin: true })
+const mesurer = () => {
+  const f = frise.value
+  if (f) bords.value = { debut: f.scrollLeft < 8, fin: f.scrollLeft + f.clientWidth > f.scrollWidth - 8 }
+}
+const defiler = (sens: number) => {
+  const f = frise.value
+  const carte = f?.firstElementChild as HTMLElement | undefined
+  if (f && carte) f.scrollBy({ left: sens * (carte.offsetWidth + 12), behavior: 'smooth' })
+}
+onMounted(mesurer)
 </script>
 
 <template>
@@ -120,17 +134,21 @@ const rattrapages = computed(() =>
       <li v-if="rates.autres" class="autres">+{{ rates.autres }}</li>
     </ul>
   </template>
-  <ul v-if="rattrapages.length" class="frise">
-    <li v-for="r in rattrapages" :key="r.l.id">
-      <span class="geant" lang="ja" aria-hidden="true">{{ filigrane(r.l) }}</span>
-      <p class="ligne"><strong>Cours {{ numero(r.l) }}</strong><span>{{ r.etat }}</span></p>
-      <p class="titre">{{ r.l.titre }}</p>
-      <RouterLink v-for="t in r.trous" :key="t.cle" :to="t.vers">
-        <span class="repere" lang="ja" aria-hidden="true">{{ t.repere }}</span>
-        <span class="corps"><strong>{{ t.nom }}</strong><small :lang="t.ja ? 'ja' : undefined">{{ t.apercu }}</small></span>
-        <Chevron />
-      </RouterLink>
-    </li>
-  </ul>
+  <div v-if="rattrapages.length" class="cadre-frise">
+    <ul ref="frise" class="frise" @scroll.passive="mesurer">
+      <li v-for="r in rattrapages" :key="r.l.id">
+        <span class="geant" lang="ja" aria-hidden="true">{{ filigrane(r.l) }}</span>
+        <p class="ligne"><strong>Cours {{ numero(r.l) }}</strong><span>{{ r.etat }}</span></p>
+        <p class="titre">{{ r.l.titre }}</p>
+        <RouterLink v-for="t in r.trous" :key="t.cle" :to="t.vers">
+          <span class="repere" lang="ja" aria-hidden="true">{{ t.repere }}</span>
+          <span class="corps"><strong>{{ t.nom }}</strong><small :lang="t.ja ? 'ja' : undefined">{{ t.apercu }}</small></span>
+          <Chevron />
+        </RouterLink>
+      </li>
+    </ul>
+    <button v-if="!bords.debut" class="defiler" aria-label="Cours précédents" @click="defiler(-1)"><Chevron gauche /></button>
+    <button v-if="!bords.fin" class="defiler suivant" aria-label="Cours suivants" @click="defiler(1)"><Chevron /></button>
+  </div>
   <p v-if="!rattrapages.length && !rates.visibles.length && !rates.autres" class="calme">Rien à consolider pour l’instant.</p>
 </template>
