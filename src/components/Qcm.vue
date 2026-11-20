@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { Exercice } from '../content/schema'
+import Barre from './Barre.vue'
 import JpText from './JpText.vue'
-import Verdict from './Verdict.vue'
 
 const props = defineProps<{ exercice: Extract<Exercice, { type: 'qcm' }> }>()
 defineEmits<{ fini: [juste: boolean] }>()
@@ -26,5 +26,13 @@ const etat = (i: number) =>
       <JpText :texte="c" />
     </button>
   </div>
-  <Verdict v-if="choisi !== undefined" :juste="choisi === exercice.reponse" @suite="$emit('fini', choisi === exercice.reponse)" />
+  <Barre
+    :juste="choisi === undefined ? undefined : choisi === exercice.reponse"
+    libelle="Suivant"
+    :inactif="choisi === undefined"
+    @action="$emit('fini', choisi === exercice.reponse)"
+  >
+    <template #aide>Touche une réponse.</template>
+    <template v-if="choisi !== exercice.reponse">Réponse : <JpText :texte="exercice.choix[exercice.reponse]" /></template>
+  </Barre>
 </template>

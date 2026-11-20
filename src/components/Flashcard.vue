@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import Barre from './Barre.vue'
 import JpText from './JpText.vue'
-import Son from './Son.vue'
 
 defineProps<{ recto: string; verso: string; rectoJp?: boolean; versoJp?: boolean; audio?: string }>()
 defineEmits<{ fini: [juste: boolean] }>()
@@ -10,18 +10,15 @@ const retournee = ref(false)
 </script>
 
 <template>
-  <div class="carte">
-    <p class="recto" :class="{ grand: rectoJp }"><JpText :texte="recto" :romaji="rectoJp && retournee" /></p>
-    <template v-if="retournee">
-      <p class="verso" :class="{ grand: versoJp }">
-        <JpText :texte="verso" :romaji="versoJp" />
-        <Son v-if="audio" :texte="audio" />
-      </p>
-    </template>
+  <div class="carte" :class="{ voilee: !retournee }">
+    <p class="recto" :class="{ grand: rectoJp }"><JpText :texte="recto" :romaji="rectoJp" /></p>
+    <p class="verso" :class="{ grand: versoJp }"><JpText :texte="verso" :romaji="versoJp" /></p>
   </div>
-  <button v-if="!retournee" class="primaire" type="button" @click="retournee = true">Afficher la réponse</button>
-  <div v-else class="rangee">
-    <button type="button" @click="$emit('fini', false)">À revoir</button>
-    <button class="primaire" type="button" @click="$emit('fini', true)">Je savais</button>
-  </div>
+  <Barre v-if="!retournee" libelle="Afficher la réponse" :audio="rectoJp ? audio : undefined" @action="retournee = true">
+    <template #aide>Trouve la réponse, puis retourne.</template>
+  </Barre>
+  <Barre v-else libelle="Je savais" :audio="audio" @action="$emit('fini', true)">
+    <template #aide>Est-ce que tu savais ?</template>
+    <template #secondaire><button type="button" @click="$emit('fini', false)">À revoir</button></template>
+  </Barre>
 </template>

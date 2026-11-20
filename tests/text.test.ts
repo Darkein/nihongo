@@ -34,3 +34,9 @@ test('une réponse en romaji accepte les variantes de transcription', () => {
   expect(estJuste('Sakana', ['さかな'], 'romaji')).toBe(true)
   expect(estJuste('su', ['つ'], 'romaji')).toBe(false)
 })
+
+test('le rōmaji lit la particule は « wa » sans toucher aux mots', () => {
+  expect(romaji('わたしは がくせいです。')).toBe('watashiwa gakuseidesu.')
+  expect(romaji('こんにちは')).toBe('konnichiwa')
+  expect(romaji('はな')).toBe('hana')
+})

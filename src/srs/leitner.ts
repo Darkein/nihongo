@@ -1,6 +1,7 @@
-export type Etat = { boite: number; echeance: string }
+export type Etat = { boite: number; echeance: string; ok?: boolean }
 
 const INTERVALLES = [1, 2, 4, 8, 16]
+export const NB_BOITES = INTERVALLES.length
 
 export function ajouterJours(jour: string, n: number): string {
   const d = new Date(jour + 'T00:00:00Z')
@@ -10,7 +11,7 @@ export function ajouterJours(jour: string, n: number): string {
 
 export function noter(etat: Etat | undefined, juste: boolean, jour: string): Etat {
   const boite = juste ? Math.min((etat?.boite ?? 0) + 1, INTERVALLES.length) : 1
-  return { boite, echeance: ajouterJours(jour, INTERVALLES[boite - 1]) }
+  return { boite, echeance: ajouterJours(jour, INTERVALLES[boite - 1]), ok: juste }
 }
 
 export function aReviser<T extends { id: string }>(

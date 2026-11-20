@@ -8,7 +8,22 @@ export const lessons: Lesson[] = Object.values(fichiers).sort((a, b) => a.id.loc
 export const derniere = lessons[lessons.length - 1]
 export const lessonParId = (id: string) => lessons.find((l) => l.id === id)
 
-export type Categorie = 'kana' | 'trace' | 'vocabulaire' | 'exercices'
+const COULEURS = ['#FFD400', '#FF8FA3', '#7CC6FE', '#7BD389', '#FF9F45', '#C3A6FF']
+
+export const numero = (l: Lesson) => Number(l.id.slice(-2))
+export const couleur = (l: Lesson) => COULEURS[(numero(l) - 1) % COULEURS.length]
+export const dateDe = (l: Lesson) =>
+  l.date ? new Date(l.date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }) : ''
+export const enTete = (l: Lesson) => [`Cours ${numero(l)}`, dateDe(l)].filter(Boolean).join(', ')
+
+export const ACTIVITES: { type: Categorie; nom: string }[] = [
+  { type: 'kana', nom: 'Kana' },
+  { type: 'trace', nom: 'Tracé' },
+  { type: 'vocabulaire', nom: 'Vocabulaire' },
+  { type: 'exercices', nom: 'Exercices' },
+]
+
+export type Categorie = 'kana' | 'trace' | 'vocabulaire' | 'exercices' | 'minitest'
 
 export type Carte = { id: string; categorie: Categorie; lesson: Lesson } & (
   | { genre: 'kana'; kana: string }
@@ -27,8 +42,11 @@ export function cartesDe(lesson: Lesson): Carte[] {
       { id: `${lesson.id}/mot/${mot.id}/jp-fr`, categorie: 'vocabulaire', lesson, genre: 'mot', mot, sens: 'jp-fr' },
       { id: `${lesson.id}/mot/${mot.id}/fr-jp`, categorie: 'vocabulaire', lesson, genre: 'mot', mot, sens: 'fr-jp' },
     ]),
-    ...[...lesson.exercices, ...(lesson.miniTest ?? [])].map(
+    ...lesson.exercices.map(
       (exercice): Carte => ({ id: `${lesson.id}/ex/${exercice.id}`, categorie: 'exercices', lesson, genre: 'exercice', exercice }),
+    ),
+    ...(lesson.miniTest ?? []).map(
+      (exercice): Carte => ({ id: `${lesson.id}/ex/${exercice.id}`, categorie: 'minitest', lesson, genre: 'exercice', exercice }),
     ),
     ...kana.map((k): Carte => ({ id: `trace/${k}`, categorie: 'trace', lesson, genre: 'trace', kana: k })),
   ]

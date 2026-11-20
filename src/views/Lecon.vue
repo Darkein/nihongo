@@ -1,73 +1,67 @@
 <script setup lang="ts">
+import Jauge from '../components/Jauge.vue'
 import JpText from '../components/JpText.vue'
-import Son from '../components/Son.vue'
-import { lessonParId } from '../content/lessons'
+import { ACTIVITES, couleur, enTete, lessonParId } from '../content/lessons'
+import { avancement, noteDe } from '../srs/avancement'
+import { progression } from '../srs/store'
 
 const props = defineProps<{ id: string }>()
 const lesson = lessonParId(props.id)
-const modes = [
-  ['tout', 'Tout'],
-  ['kana', 'Kana'],
-  ['trace', 'Tracé'],
-  ['vocabulaire', 'Vocabulaire'],
-  ['exercices', 'Exercices'],
-]
+const lien = (type: string) => `/session?lecon=${props.id}&type=${type}`
+const enCours = (type: string) => progression.session?.retour === lien(type)
 </script>
 
 <template>
   <p v-if="!lesson">Leçon introuvable.</p>
   <template v-else>
-    <h1>{{ lesson.titre }}</h1>
+    <header class="affiche" :style="{ background: couleur(lesson) }">
+      <p class="sur">{{ enTete(lesson) }}</p>
+      <h1>{{ lesson.titre }}</h1>
+      <p class="ligne"><span>{{ avancement(lesson).pct }} % acquis</span></p>
+      <Jauge :pct="avancement(lesson).pct" />
+      <span class="geant" aria-hidden="true">{{ lesson.kana[0]?.[0] }}</span>
+    </header>
 
-    <section class="bloc">
-      <h2>S'entraîner</h2>
-      <div class="rangee">
-        <RouterLink v-for="[type, nom] in modes" :key="type" class="bouton" :to="`/session?lecon=${lesson.id}&type=${type}`">{{ nom }}</RouterLink>
-      </div>
-      <div class="rangee">
-        <RouterLink v-if="lesson.miniTest" class="bouton primaire" :to="`/session?lecon=${lesson.id}&type=minitest`">Mini-test du cours</RouterLink>
-        <RouterLink class="bouton" :to="`/session?lecon=${lesson.id}&type=blanc`">Mini-test blanc</RouterLink>
-      </div>
-    </section>
+    <h2>S'entraîner</h2>
+    <div class="activites">
+      <RouterLink v-for="a in ACTIVITES" :key="a.type" :to="lien(a.type)">
+        <span class="corps">
+          <span class="ligne"><strong>{{ a.nom }}</strong><span>{{ enCours(a.type) ? 'En cours' : avancement(lesson, a.type).texte }}</span></span>
+          <Jauge :pct="avancement(lesson, a.type).pct" />
+        </span>
+      </RouterLink>
+    </div>
 
-    <section v-for="s in lesson.resume" :key="s.titre" class="bloc">
-      <h2>{{ s.titre }}</h2>
-      <ul>
-        <li v-for="p in s.points" :key="p"><JpText :texte="p" /></li>
-      </ul>
-    </section>
+    <h2>Mini-tests</h2>
+    <div class="activites">
+      <RouterLink v-if="lesson.miniTest" :to="lien('minitest')">
+        <span class="corps">
+          <span class="ligne"><strong>Mini-test du cours</strong><span>{{ enCours('minitest') ? 'En cours' : (noteDe(`${lesson.id}/minitest`) ?? 'À passer') }}</span></span>
+          <small>Celui passé en classe, {{ lesson.miniTest.length }} questions</small>
+        </span>
+      </RouterLink>
+      <RouterLink :to="lien('blanc')">
+        <span class="corps">
+          <span class="ligne"><strong>Mini-test blanc</strong><span>{{ enCours('blanc') ? 'En cours' : (noteDe(`${lesson.id}/blanc`) ?? 'À passer') }}</span></span>
+          <small>Tiré au hasard, au même format</small>
+        </span>
+      </RouterLink>
+    </div>
 
-    <section class="bloc">
-      <h2>Kana <small>— touche un caractère pour le tracer</small></h2>
-      <div v-for="ligne in lesson.kana" :key="ligne" class="ligne-kana">
-        <RouterLink v-for="k in ligne" :key="k" class="kana" :to="`/tracer/${k}`">{{ k }}</RouterLink>
-      </div>
-    </section>
+    <h2>Le cours</h2>
+    <div class="activites">
+      <RouterLink :to="`/lecon/${lesson.id}/resume`">
+        <span class="corps">
+          <span class="ligne"><strong>Résumé, kana et vocabulaire</strong><span aria-hidden="true">›</span></span>
+          <small>{{ lesson.resume.map((s) => s.titre).join(', ') }}</small>
+        </span>
+      </RouterLink>
+    </div>
 
-    <section class="bloc">
-      <h2>Vocabulaire</h2>
-      <ul class="mots">
-        <li v-for="m in lesson.mots" :key="m.id">
-          <span><JpText :texte="m.jp" romaji /></span>
-          <span>{{ m.fr }}</span>
-          <Son :texte="m.jp" />
-        </li>
-      </ul>
-    </section>
-
-    <section v-if="lesson.liens" class="bloc">
-      <h2>Pour aller plus loin</h2>
-      <ul>
-        <li v-for="l in lesson.liens" :key="l.url"><a :href="l.url" target="_blank" rel="noopener noreferrer">{{ l.titre }}</a></li>
-      </ul>
-    </section>
-
-    <section class="bloc">
-      <h2>Devoirs donnés à ce cours</h2>
-      <ul>
-        <li v-for="a in lesson.prochainCours.annonce" :key="a"><strong>Annoncé :</strong> <JpText :texte="a" /></li>
-        <li v-for="d in lesson.prochainCours.devoirs" :key="d"><JpText :texte="d" /></li>
-      </ul>
-    </section>
+    <h2>Devoirs donnés à ce cours</h2>
+    <ul class="liste">
+      <li v-for="a in lesson.prochainCours.annonce" :key="a"><strong>Annoncé :</strong> <JpText :texte="a" /></li>
+      <li v-for="d in lesson.prochainCours.devoirs" :key="d"><JpText :texte="d" /></li>
+    </ul>
   </template>
 </template>

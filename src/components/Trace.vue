@@ -2,8 +2,7 @@
 import HanziWriter from 'hanzi-writer'
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { toRomaji } from 'wanakana'
-import Son from './Son.vue'
-import Verdict from './Verdict.vue'
+import Barre from './Barre.vue'
 
 const props = defineProps<{ kana: string; rappel?: boolean }>()
 defineEmits<{ fini: [juste: boolean] }>()
@@ -13,7 +12,14 @@ const cible = ref<HTMLDivElement>()
 const erreurs = ref<number>()
 let writer: HanziWriter | undefined
 
-const couleur = (nom: string) => getComputedStyle(document.documentElement).getPropertyValue(nom).trim()
+// Passe par `color` pour obtenir une couleur résolue (light-dark, thème de la session).
+function couleur(nom: string) {
+  const sonde = cible.value!
+  sonde.style.color = `var(${nom})`
+  const rgb = getComputedStyle(sonde).color
+  sonde.style.color = ''
+  return rgb
+}
 
 function quiz() {
   erreurs.value = undefined
@@ -51,14 +57,20 @@ async function montrer() {
 
 <template>
   <p class="question">
-    Trace <strong>{{ toRomaji(kana) }}</strong> en {{ /[ァ-ヶ]/.test(kana) ? 'katakana' : 'hiragana' }}, trait par trait.
-    <Son :texte="kana" />
+    Trace <strong class="cible">{{ toRomaji(kana) }}</strong> en {{ /[ァ-ヶ]/.test(kana) ? 'katakana' : 'hiragana' }}
   </p>
   <div ref="cible" class="trace"></div>
-  <div v-if="erreurs === undefined" class="rangee">
-    <button v-if="!rappel" type="button" @click="montrer">Montrer le tracé</button>
-  </div>
-  <Verdict v-else :juste="erreurs <= MAX_ERREURS" @suite="$emit('fini', erreurs <= MAX_ERREURS)">
-    <span class="jp grand">{{ kana }}</span> — {{ erreurs }} trait(s) raté(s)
-  </Verdict>
+  <Barre
+    :juste="erreurs === undefined ? undefined : erreurs <= MAX_ERREURS"
+    libelle="Suivant"
+    :inactif="erreurs === undefined"
+    :audio="kana"
+    @action="$emit('fini', erreurs! <= MAX_ERREURS)"
+  >
+    <template #aide>Trait par trait, dans l'ordre.</template>
+    <template #secondaire>
+      <button v-if="!rappel" type="button" :disabled="erreurs !== undefined" @click="montrer">Montrer le tracé</button>
+    </template>
+    {{ erreurs ? `${erreurs} trait${erreurs > 1 ? 's' : ''} raté${erreurs > 1 ? 's' : ''}` : 'Aucun trait raté' }}
+  </Barre>
 </template>

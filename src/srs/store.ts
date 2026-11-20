@@ -1,26 +1,53 @@
 import { reactive, watch } from 'vue'
+import type { Exercice } from '../content/schema'
 import { noter, type Etat } from './leitner'
 
 const CLE = 'nihongo.progression.v1'
 
-type Donnees = { version: 1; cartes: Record<string, Etat>; romaji: boolean }
+export type SessionEnCours = {
+  cle: string
+  titre: string
+  retour: string
+  ids?: string[]
+  exercices?: Exercice[]
+  index: number
+  justes: number
+}
+export type Theme = 'auto' | 'clair' | 'sombre'
+export type Note = { note: number; date: string }
+
+type Donnees = {
+  version: 1
+  cartes: Record<string, Etat>
+  romaji: boolean
+  theme: Theme
+  vocabulaire: 'saisie' | 'cartes'
+  tests: Record<string, Note>
+  session: SessionEnCours | null
+}
 
 function valider(d: unknown): Donnees {
-  const o = d as Donnees
+  const o = d as Partial<Donnees>
   const ok =
     o?.version === 1 &&
     typeof o.romaji === 'boolean' &&
     typeof o.cartes === 'object' &&
-    Object.values(o.cartes).every((e) => Number.isInteger(e?.boite) && /^\d{4}-\d{2}-\d{2}$/.test(e?.echeance))
+    Object.values(o.cartes!).every((e) => Number.isInteger(e?.boite) && /^\d{4}-\d{2}-\d{2}$/.test(e?.echeance))
   if (!ok) throw new Error('Fichier de progression invalide')
-  return { version: 1, cartes: o.cartes, romaji: o.romaji }
+  const tests = Object.fromEntries(
+    Object.entries(o.tests ?? {}).filter(([, n]) => typeof n?.note === 'number' && typeof n?.date === 'string'),
+  )
+  const theme = o.theme === 'clair' || o.theme === 'sombre' ? o.theme : 'auto'
+  const vocabulaire = o.vocabulaire === 'cartes' ? 'cartes' : 'saisie'
+  return { version: 1, cartes: o.cartes!, romaji: o.romaji!, theme, vocabulaire, tests, session: null }
 }
 
 function charger(): Donnees {
   try {
-    return valider(JSON.parse(localStorage.getItem(CLE) ?? ''))
+    const brut = JSON.parse(localStorage.getItem(CLE) ?? '')
+    return { ...valider(brut), session: brut.session ?? null }
   } catch {
-    return { version: 1, cartes: {}, romaji: true }
+    return { version: 1, cartes: {}, romaji: true, theme: 'auto', vocabulaire: 'saisie', tests: {}, session: null }
   }
 }
 
@@ -40,7 +67,7 @@ export function enregistrer(id: string, juste: boolean) {
   progression.cartes[id] = noter(progression.cartes[id], juste, aujourdhui())
 }
 
-export const exporter = () => JSON.stringify(progression, null, 2)
+export const exporter = () => JSON.stringify({ ...progression, session: null }, null, 2)
 
 export function importer(json: string) {
   Object.assign(progression, valider(JSON.parse(json)))

@@ -7,8 +7,13 @@ const essai = ref(0)
 </script>
 
 <template>
-  <section class="bloc exercice">
-    <Trace :key="essai" :kana="kana" @fini="essai++" />
-  </section>
-  <button class="bouton" type="button" @click="$router.back()">Retour</button>
+  <div class="session" style="--teinte: #7cc6fe">
+    <header class="barre-session">
+      <button class="fermer" type="button" aria-label="Retour" @click="$router.back()">✕</button>
+      <span class="ou-titre">Tracé libre</span>
+    </header>
+    <section class="exercice">
+      <Trace :key="essai" :kana="kana" @fini="essai++" />
+    </section>
+  </div>
 </template>

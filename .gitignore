@@ -1,6 +1,7 @@
 node_modules
 dist
 dev-dist
+.vitest
 inbox
 *.eml
 .DS_Store

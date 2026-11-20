@@ -1,43 +1,66 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { cartesDe, derniere, lessons, toutesLesCartes } from '../content/lessons'
+import Jauge from '../components/Jauge.vue'
+import { ACTIVITES, couleur, derniere, enTete, lessons, numero, toutesLesCartes } from '../content/lessons'
+import { avancement, noteDe } from '../srs/avancement'
 import { aReviser } from '../srs/leitner'
 import { aujourdhui, progression } from '../srs/store'
 
 const duJour = computed(() => aReviser(toutesLesCartes(), progression.cartes, aujourdhui()).length)
-const avancement = (id: string) => {
-  const cartes = cartesDe(lessons.find((l) => l.id === id)!)
-  return `${cartes.filter((c) => progression.cartes[c.id]).length} / ${cartes.length}`
-}
-const date = (d?: string) => (d ? new Date(d).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) : '')
+
+const suite = computed(() => {
+  const s = progression.session
+  if (s) return { sur: 'Reprendre', titre: `${s.titre}, ${s.index + 1} sur ${s.ids?.length ?? s.exercices?.length}`, vers: s.retour }
+  if (duJour.value) return { sur: 'À faire aujourd’hui', titre: `Révision du jour, ${duJour.value} cartes`, vers: '/session?mode=jour' }
+  const a = ACTIVITES.find((x) => avancement(derniere, x.type).pct < 100)
+  if (a) return { sur: `Continuer le cours ${numero(derniere)}`, titre: a.nom, vers: `/session?lecon=${derniere.id}&type=${a.type}` }
+  return undefined
+})
+const tuiles = computed(() => [
+  ...ACTIVITES.filter((a) => a.type !== 'trace').map((a) => ({ ...a, a: avancement(derniere, a.type) })),
+])
 </script>
 
 <template>
-  <section class="bloc vedette">
-    <h1>Révision du jour</h1>
-    <p v-if="duJour">{{ duJour }} carte(s) à revoir, toutes leçons confondues.</p>
-    <p v-else>Rien à revoir aujourd'hui. 👏</p>
-    <RouterLink v-if="duJour" class="bouton primaire" to="/session?mode=jour">Commencer</RouterLink>
-  </section>
-
-  <section class="bloc">
-    <h2>À préparer pour le prochain cours</h2>
-    <ul>
-      <li v-for="a in derniere.prochainCours.annonce" :key="a"><strong>Annoncé :</strong> {{ a }}</li>
-      <li v-for="d in derniere.prochainCours.devoirs" :key="d">{{ d }}</li>
-    </ul>
-    <div class="rangee">
-      <RouterLink class="bouton" :to="`/session?lecon=${derniere.id}&type=blanc`">Mini-test blanc</RouterLink>
-      <RouterLink class="bouton" :to="`/lecon/${derniere.id}`">Revoir la leçon</RouterLink>
-    </div>
-  </section>
-
-  <h2>Leçons</h2>
-  <RouterLink v-for="l in [...lessons].reverse()" :key="l.id" class="bloc lien-lecon" :to="`/lecon/${l.id}`">
-    <span class="numero">{{ Number(l.id.slice(-2)) }}</span>
-    <span>
-      <strong>{{ l.titre }}</strong>
-      <small>{{ date(l.date) }} <span class="jp">{{ l.kana.map((k) => k[0]).join('・') }}</span> · {{ avancement(l.id) }} cartes vues</small>
-    </span>
+  <RouterLink class="affiche" :style="{ background: couleur(derniere) }" :to="`/lecon/${derniere.id}`">
+    <p class="sur">{{ enTete(derniere) }}</p>
+    <h1>{{ derniere.titre }}</h1>
+    <span class="geant" aria-hidden="true">{{ derniere.kana[0]?.[0] }}</span>
   </RouterLink>
+
+  <RouterLink v-if="suite" class="pilule" :to="suite.vers">
+    <span><small>{{ suite.sur }}</small>{{ suite.titre }}</span>
+    <span class="fleche" aria-hidden="true">▶</span>
+  </RouterLink>
+  <p v-else class="calme">Tout est à jour pour aujourd'hui.</p>
+
+  <div class="tuiles">
+    <RouterLink v-for="t in tuiles" :key="t.type" class="tuile-etat" :class="{ fait: t.a.pct === 100, entame: t.a.fait > 0 }" :to="`/session?lecon=${derniere.id}&type=${t.type}`">
+      <span>{{ t.nom }}</span>
+      <strong>{{ t.a.texte }}</strong>
+    </RouterLink>
+    <RouterLink class="tuile-etat" :class="{ fait: noteDe(`${derniere.id}/blanc`) }" :to="`/session?lecon=${derniere.id}&type=blanc`">
+      <span>Mini-test blanc</span>
+      <strong>{{ noteDe(`${derniere.id}/blanc`) ?? 'À passer' }}</strong>
+    </RouterLink>
+  </div>
+
+  <h2>Où tu en es</h2>
+  <ol class="parcours">
+    <li v-for="l in lessons" :key="l.id">
+      <RouterLink :to="`/lecon/${l.id}`">
+        <span class="pastille" :style="{ background: couleur(l) }">{{ numero(l) }}</span>
+        <span class="corps">
+          <span class="ligne"><strong>{{ l.titre }}</strong><span>{{ avancement(l).pct }} %</span></span>
+          <Jauge :pct="avancement(l).pct" />
+        </span>
+      </RouterLink>
+    </li>
+  </ol>
+
+  <h2>Pour le prochain cours</h2>
+  <ul class="liste">
+    <li v-for="a in derniere.prochainCours.annonce" :key="a"><strong>Annoncé :</strong> {{ a }}</li>
+    <li v-for="d in derniere.prochainCours.devoirs" :key="d">{{ d }}</li>
+  </ul>
 </template>
