@@ -7,6 +7,8 @@
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     <title>Nihongo</title>
+    <!-- Couleur de l'accueil posée avant le premier affichage, pour éviter un flash au chargement. -->
+    <script>document.documentElement.classList.toggle('accueil', !location.hash || location.hash === '#/')</script>
   </head>
   <body>
     <div id="app"></div>

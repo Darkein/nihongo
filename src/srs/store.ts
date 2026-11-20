@@ -24,6 +24,8 @@ type Donnees = {
   vocabulaire: 'saisie' | 'cartes'
   // Notes de chaque test, de la plus ancienne à la plus récente.
   tests: Record<string, Note[]>
+  // Clés des devoirs cochés.
+  devoirs: string[]
   session: SessionEnCours | null
 }
 
@@ -47,7 +49,8 @@ function valider(d: unknown): Donnees {
   )
   const theme = o.theme === 'clair' || o.theme === 'sombre' ? o.theme : 'auto'
   const vocabulaire = o.vocabulaire === 'cartes' ? 'cartes' : 'saisie'
-  return { version: 1, cartes: o.cartes!, romaji: o.romaji!, theme, vocabulaire, tests, session: null }
+  const devoirs = Array.isArray(o.devoirs) ? o.devoirs.filter((d) => typeof d === 'string') : []
+  return { version: 1, cartes: o.cartes!, romaji: o.romaji!, theme, vocabulaire, tests, devoirs, session: null }
 }
 
 function charger(): Donnees {
@@ -55,7 +58,7 @@ function charger(): Donnees {
     const brut = JSON.parse(localStorage.getItem(CLE) ?? '')
     return { ...valider(brut), session: brut.session ?? null }
   } catch {
-    return { version: 1, cartes: {}, romaji: true, theme: 'auto', vocabulaire: 'saisie', tests: {}, session: null }
+    return { version: 1, cartes: {}, romaji: true, theme: 'auto', vocabulaire: 'saisie', tests: {}, devoirs: [], session: null }
   }
 }
 
@@ -77,6 +80,10 @@ export function enregistrer(id: string, juste: boolean) {
 
 export function noterTest(cle: string, note: number) {
   progression.tests[cle] = [...(progression.tests[cle] ?? []), { note, date: aujourdhui() }].slice(-NOTES_GARDEES)
+}
+
+export function cocherDevoir(cle: string, fait: boolean) {
+  progression.devoirs = fait ? [...new Set([...progression.devoirs, cle])] : progression.devoirs.filter((d) => d !== cle)
 }
 
 export const exporter = () => JSON.stringify({ ...progression, session: null }, null, 2)

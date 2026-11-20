@@ -87,6 +87,6 @@
   ],
   "prochainCours": {
     "annonce": [],
-    "devoirs": ["Pratiquer l'écriture et la lecture des lignes YA (やゆよ) et RA (らりるれろ) en hiragana et en katakana."]
+    "devoirs": [{ "texte": "Pratiquer l'écriture et la lecture des lignes YA (やゆよ) et RA (らりるれろ) en hiragana et en katakana.", "activites": ["kana", "trace"] }]
   }
 }

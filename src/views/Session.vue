@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import Flashcard from '../components/Flashcard.vue'
 import Qcm from '../components/Qcm.vue'
 import Saisie from '../components/Saisie.vue'
@@ -9,7 +9,6 @@ import Tuiles from '../components/Tuiles.vue'
 import {
   ACTIVITES,
   cartesDe,
-  couleur,
   lessonParId,
   lessons,
   melanger,
@@ -24,6 +23,7 @@ import { noteDe } from '../srs/avancement'
 import { aujourdhui, enregistrer, noterTest, progression } from '../srs/store'
 
 const route = useRoute()
+const router = useRouter()
 const { mode, lecon, type } = route.query as Record<string, string | undefined>
 const lesson = lecon ? lessonParId(lecon) : undefined
 const estTest = type === 'minitest' || type === 'blanc'
@@ -34,12 +34,13 @@ const NOMS: Record<string, string> = {
   minitest: 'mini-test',
   blanc: 'mini-test blanc',
 }
-const titre = mode === 'jour' ? 'Révision du jour' : lesson ? `Cours ${numero(lesson)}, ${NOMS[type ?? ''] ?? ''}` : ''
+const titre = mode === 'jour' ? 'Révision du jour' : mode === 'libre' ? `Tous les kana, ${type === 'trace' ? 'tracé' : 'lecture'}` : lesson ? `Cours ${numero(lesson)}, ${NOMS[type ?? ''] ?? ''}` : ''
 
 const blanc = (e: Exercice): Carte => ({ id: `blanc/${e.id}`, categorie: 'minitest', lesson: lesson!, genre: 'exercice', exercice: e })
 
 function nouvelles(): Carte[] {
   if (mode === 'jour') return melanger(aReviser(toutesLesCartes(), progression.cartes, aujourdhui()))
+  if (mode === 'libre') return melanger(toutesLesCartes().filter((c) => c.categorie === type))
   if (!lesson) return []
   if (type === 'blanc') return miniTestBlanc(lesson).map(blanc)
   const cartes = cartesDe(lesson).filter((c) => c.categorie === type)
@@ -76,7 +77,6 @@ function memoriser() {
 if (cartes.length && !reprise) memoriser()
 
 const carte = computed(() => cartes[index.value])
-const fond = computed(() => couleur(carte.value?.lesson ?? lesson ?? lessons[0]))
 const etiquette = computed(() =>
   mode === 'jour' && carte.value ? `Révision du jour, cours ${numero(carte.value.lesson)}` : titre,
 )
@@ -91,11 +91,13 @@ const motEnExercice = computed((): Exercice | undefined => {
   return { type: 'qcm', id: c.mot.id, question: `Que veut dire ${c.mot.jp} ?`, choix: choix.map((m) => m.fr), reponse: choix.indexOf(c.mot) }
 })
 const note = computed(() => Math.round((justes.value / cartes.length) * 100) / 10)
-const sortie = lesson ? `/lecon/${lesson.id}` : '/'
+const sortie = lesson ? `/lecon/${lesson.id}` : mode === 'libre' ? '/entrainer/kana' : '/'
+// Retour à la page d'où l'on vient (accueil, leçon…), sinon à la page de la série.
+const quitter = () => (router.options.history.state.back ? router.back() : router.push(sortie))
 
 function fini(juste: boolean) {
   if (juste) justes.value++
-  if (!carte.value.id.startsWith('blanc/')) enregistrer(carte.value.id, juste)
+  if (mode !== 'libre' && !carte.value.id.startsWith('blanc/')) enregistrer(carte.value.id, juste)
   index.value++
   memoriser()
   if (index.value === cartes.length && estTest && lesson) noterTest(`${lesson.id}/${type}`, note.value)
@@ -108,9 +110,9 @@ function recommencer() {
 </script>
 
 <template>
-  <div class="session" :style="{ '--teinte': fond }">
+  <div class="session">
     <header class="barre-session">
-      <RouterLink class="fermer" :to="sortie" aria-label="Quitter, la session sera gardée">✕</RouterLink>
+      <button class="fermer" type="button" aria-label="Quitter, la session sera gardée" @click="quitter">✕</button>
       <span class="jauge epaisse" role="progressbar" :aria-valuenow="index" aria-valuemin="0" :aria-valuemax="cartes.length">
         <i :style="{ width: (index / Math.max(cartes.length, 1)) * 100 + '%' }"></i>
       </span>
@@ -132,7 +134,7 @@ function recommencer() {
           grand
           @fini="fini"
         />
-        <Trace v-else-if="carte.genre === 'trace'" :kana="carte.kana" rappel @fini="fini" />
+        <Trace v-else-if="carte.genre === 'trace'" :kana="carte.kana" :rappel="!!progression.cartes[carte.id]" @fini="fini" />
         <Saisie v-else-if="carte.genre === 'mot' && motEnExercice?.type === 'saisie'" :exercice="motEnExercice" @fini="fini" />
         <Qcm v-else-if="carte.genre === 'mot' && motEnExercice?.type === 'qcm'" :exercice="motEnExercice" @fini="fini" />
         <Flashcard
@@ -156,10 +158,10 @@ function recommencer() {
         <p v-if="estTest" class="note">{{ note }}<small>/10</small></p>
         <h1>{{ justes }} juste{{ justes > 1 ? 's' : '' }} sur {{ cartes.length }}</h1>
         <p v-if="notePrecedente">Note précédente : {{ notePrecedente }}</p>
-        <p v-if="justes < cartes.length">Les cartes ratées reviendront demain dans la révision du jour.</p>
+        <p v-if="mode !== 'libre' && justes < cartes.length">Les cartes ratées reviendront demain dans la révision du jour.</p>
       </template>
       <h1 v-else>Rien à faire dans cette série</h1>
-      <RouterLink class="bouton primaire" :to="sortie">Terminer</RouterLink>
+      <button class="primaire" type="button" @click="quitter">Terminer</button>
       <button v-if="cartes.length" type="button" @click="recommencer">{{ type === 'blanc' ? 'Nouveau tirage' : 'Recommencer' }}</button>
     </section>
   </div>

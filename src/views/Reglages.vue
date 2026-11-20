@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import EnTete from '../components/EnTete.vue'
 import { exporter, importer, progression } from '../srs/store'
 
 const message = ref('')
+const VERSION = __VERSION__
 
 function telecharger() {
   const a = document.createElement('a')
@@ -25,7 +27,7 @@ async function charger(e: Event) {
 </script>
 
 <template>
-  <h1 class="titre-page">Réglages</h1>
+  <EnTete sur="L’app, à ta façon" titre="Réglages" filigrane="設定" />
   <section>
     <h2 id="theme">Apparence</h2>
     <div class="segments" role="radiogroup" aria-labelledby="theme">
@@ -69,4 +71,5 @@ async function charger(e: Event) {
       (Arphic Public License). Animation : Hanzi Writer. Conversion rōmaji : WanaKana.
     </p>
   </section>
+  <p class="version">Version {{ VERSION }}</p>
 </template>

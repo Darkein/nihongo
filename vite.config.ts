@@ -4,6 +4,8 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
   base: '/nihongo/',
+  // Version affichée dans les réglages : la date de la mise en ligne.
+  define: { __VERSION__: JSON.stringify(new Date().toISOString().slice(0, 10).replaceAll('-', '.')) },
   plugins: [
     vue(),
     VitePWA({

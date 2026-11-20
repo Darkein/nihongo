@@ -8,10 +8,7 @@ export const lessons: Lesson[] = Object.values(fichiers).sort((a, b) => a.id.loc
 export const derniere = lessons[lessons.length - 1]
 export const lessonParId = (id: string) => lessons.find((l) => l.id === id)
 
-const COULEURS = ['#FFD400', '#FF8FA3', '#7CC6FE', '#7BD389', '#FF9F45', '#C3A6FF']
-
 export const numero = (l: Lesson) => Number(l.id.slice(-2))
-export const couleur = (l: Lesson) => COULEURS[(numero(l) - 1) % COULEURS.length]
 export const dateDe = (l: Lesson) =>
   l.date ? new Date(l.date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }) : ''
 export const enTete = (l: Lesson) => [`Cours ${numero(l)}`, dateDe(l)].filter(Boolean).join(', ')
@@ -24,6 +21,12 @@ export const ACTIVITES: { type: Categorie; nom: string }[] = [
 ]
 
 export type Categorie = 'kana' | 'trace' | 'vocabulaire' | 'exercices' | 'minitest'
+
+export const devoirsDe = (l: Lesson) =>
+  l.prochainCours.devoirs.map((d, i) => ({
+    cle: `${l.id}/${i}`,
+    ...(typeof d === 'string' ? { texte: d, activites: [] } : d),
+  }))
 
 export type Carte = { id: string; categorie: Categorie; lesson: Lesson } & (
   | { genre: 'kana'; kana: string }

@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import Jauge from '../components/Jauge.vue'
-import { ACTIVITES, couleur, derniere, enTete, lessons, numero, toutesLesCartes } from '../content/lessons'
-import { avancement, etatTest, lienTest } from '../srs/avancement'
+import Chevron from '../components/Chevron.vue'
+import Devoirs from '../components/Devoirs.vue'
+import EnTete from '../components/EnTete.vue'
+import { ACTIVITES, derniere, enTete, numero, toutesLesCartes } from '../content/lessons'
+import { dateJaponaise } from '../content/date'
+import { avancement } from '../srs/avancement'
 import { aReviser } from '../srs/leitner'
 import { aujourdhui, progression } from '../srs/store'
 
@@ -11,66 +14,36 @@ const duJour = computed(() => aReviser(toutesLesCartes(), progression.cartes, au
 const suite = computed(() => {
   const s = progression.session
   if (s) return { sur: 'Reprendre', titre: `${s.titre}, ${s.index + 1} sur ${s.ids?.length ?? s.exercices?.length}`, vers: s.retour }
-  if (duJour.value) return { sur: 'À faire aujourd’hui', titre: `Révision du jour, ${duJour.value} cartes`, vers: '/session?mode=jour' }
+  if (duJour.value) return { sur: 'À faire maintenant', titre: `Révision du jour, ${duJour.value} cartes`, vers: '/session?mode=jour' }
   const a = ACTIVITES.find((x) => avancement(derniere, x.type).pct < 100)
   if (a) return { sur: `Continuer le cours ${numero(derniere)}`, titre: a.nom, vers: `/session?lecon=${derniere.id}&type=${a.type}` }
   return undefined
 })
-const tuiles = computed(() => [
-  ...ACTIVITES.map((a) => ({ ...a, a: avancement(derniere, a.type) })),
-])
-// Un mini-test blanc par cours, le plus récent en premier.
-const blancs = computed(() => [...lessons].reverse().map((l) => ({ l, ...etatTest(l.id, 'blanc') })))
+const { annonce, devoirs } = derniere.prochainCours
 </script>
 
 <template>
-  <RouterLink class="affiche" :style="{ background: couleur(derniere) }" :to="`/lecon/${derniere.id}`">
-    <p class="sur">{{ enTete(derniere) }}</p>
-    <h1>{{ derniere.titre }}</h1>
-    <span class="geant" aria-hidden="true">{{ derniere.kana[0]?.[0] }}</span>
-  </RouterLink>
+  <EnTete :sur="dateJaponaise(new Date())" titre="Aujourd’hui" filigrane="今日" />
 
   <RouterLink v-if="suite" class="pilule" :to="suite.vers">
     <span><small>{{ suite.sur }}</small>{{ suite.titre }}</span>
-    <span class="fleche" aria-hidden="true">▶</span>
+    <span class="fleche"><Chevron /></span>
   </RouterLink>
   <p v-else class="calme">Tout est à jour pour aujourd'hui.</p>
 
-  <div class="tuiles">
-    <RouterLink v-for="t in tuiles" :key="t.type" class="tuile-etat" :class="{ fait: t.a.pct === 100, entame: t.a.fait > 0 }" :to="`/session?lecon=${derniere.id}&type=${t.type}`">
-      <span>{{ t.nom }}</span>
-      <strong>{{ t.a.texte }}</strong>
-    </RouterLink>
-  </div>
+  <template v-if="annonce.length || devoirs.length">
+    <h2>Pour le prochain cours</h2>
+    <Devoirs :lesson="derniere" />
+  </template>
 
-  <h2>Mini-tests blancs</h2>
+  <h2>Dernier cours</h2>
   <div class="activites">
-    <RouterLink v-for="b in blancs" :key="b.l.id" :to="lienTest(b.l.id, 'blanc')">
-      <span class="pastille" :style="{ background: couleur(b.l) }">{{ numero(b.l) }}</span>
+    <RouterLink :to="`/lecon/${derniere.id}`">
+      <span class="pastille">{{ numero(derniere) }}</span>
       <span class="corps">
-        <span class="ligne"><strong>Cours {{ numero(b.l) }}</strong><span>{{ b.etat }}</span></span>
-        <small>{{ b.l.titre }}</small>
-        <small v-if="b.detail">{{ b.detail }}</small>
+        <span class="ligne"><strong>{{ derniere.titre }}</strong><Chevron /></span>
+        <small>{{ enTete(derniere) }} · {{ avancement(derniere).pct }} % acquis</small>
       </span>
     </RouterLink>
   </div>
-
-  <h2>Où tu en es</h2>
-  <ol class="parcours">
-    <li v-for="l in lessons" :key="l.id">
-      <RouterLink :to="`/lecon/${l.id}`">
-        <span class="pastille" :style="{ background: couleur(l) }">{{ numero(l) }}</span>
-        <span class="corps">
-          <span class="ligne"><strong>{{ l.titre }}</strong><span>{{ avancement(l).pct }} %</span></span>
-          <Jauge :pct="avancement(l).pct" />
-        </span>
-      </RouterLink>
-    </li>
-  </ol>
-
-  <h2>Pour le prochain cours</h2>
-  <ul class="liste">
-    <li v-for="a in derniere.prochainCours.annonce" :key="a"><strong>Annoncé :</strong> {{ a }}</li>
-    <li v-for="d in derniere.prochainCours.devoirs" :key="d">{{ d }}</li>
-  </ul>
 </template>
