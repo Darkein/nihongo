@@ -22,9 +22,14 @@ type Donnees = {
   romaji: boolean
   theme: Theme
   vocabulaire: 'saisie' | 'cartes'
-  tests: Record<string, Note>
+  // Notes de chaque test, de la plus ancienne à la plus récente.
+  tests: Record<string, Note[]>
   session: SessionEnCours | null
 }
+
+const NOTES_GARDEES = 10
+const estNote = (n: unknown): n is Note =>
+  typeof (n as Note)?.note === 'number' && typeof (n as Note)?.date === 'string'
 
 function valider(d: unknown): Donnees {
   const o = d as Partial<Donnees>
@@ -34,8 +39,11 @@ function valider(d: unknown): Donnees {
     typeof o.cartes === 'object' &&
     Object.values(o.cartes!).every((e) => Number.isInteger(e?.boite) && /^\d{4}-\d{2}-\d{2}$/.test(e?.echeance))
   if (!ok) throw new Error('Fichier de progression invalide')
+  // Les anciennes sauvegardes ne gardaient qu'une note par test, sans tableau.
   const tests = Object.fromEntries(
-    Object.entries(o.tests ?? {}).filter(([, n]) => typeof n?.note === 'number' && typeof n?.date === 'string'),
+    Object.entries((o.tests ?? {}) as Record<string, unknown>)
+      .map(([cle, v]) => [cle, [v].flat().filter(estNote).slice(-NOTES_GARDEES)] as const)
+      .filter(([, notes]) => notes.length),
   )
   const theme = o.theme === 'clair' || o.theme === 'sombre' ? o.theme : 'auto'
   const vocabulaire = o.vocabulaire === 'cartes' ? 'cartes' : 'saisie'
@@ -65,6 +73,10 @@ export const aujourdhui = () => new Date().toLocaleDateString('sv')
 
 export function enregistrer(id: string, juste: boolean) {
   progression.cartes[id] = noter(progression.cartes[id], juste, aujourdhui())
+}
+
+export function noterTest(cle: string, note: number) {
+  progression.tests[cle] = [...(progression.tests[cle] ?? []), { note, date: aujourdhui() }].slice(-NOTES_GARDEES)
 }
 
 export const exporter = () => JSON.stringify({ ...progression, session: null }, null, 2)

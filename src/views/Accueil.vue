@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import Jauge from '../components/Jauge.vue'
 import { ACTIVITES, couleur, derniere, enTete, lessons, numero, toutesLesCartes } from '../content/lessons'
-import { avancement, noteDe } from '../srs/avancement'
+import { avancement, etatTest, lienTest } from '../srs/avancement'
 import { aReviser } from '../srs/leitner'
 import { aujourdhui, progression } from '../srs/store'
 
@@ -17,8 +17,10 @@ const suite = computed(() => {
   return undefined
 })
 const tuiles = computed(() => [
-  ...ACTIVITES.filter((a) => a.type !== 'trace').map((a) => ({ ...a, a: avancement(derniere, a.type) })),
+  ...ACTIVITES.map((a) => ({ ...a, a: avancement(derniere, a.type) })),
 ])
+// Un mini-test blanc par cours, le plus récent en premier.
+const blancs = computed(() => [...lessons].reverse().map((l) => ({ l, ...etatTest(l.id, 'blanc') })))
 </script>
 
 <template>
@@ -39,9 +41,17 @@ const tuiles = computed(() => [
       <span>{{ t.nom }}</span>
       <strong>{{ t.a.texte }}</strong>
     </RouterLink>
-    <RouterLink class="tuile-etat" :class="{ fait: noteDe(`${derniere.id}/blanc`) }" :to="`/session?lecon=${derniere.id}&type=blanc`">
-      <span>Mini-test blanc</span>
-      <strong>{{ noteDe(`${derniere.id}/blanc`) ?? 'À passer' }}</strong>
+  </div>
+
+  <h2>Mini-tests blancs</h2>
+  <div class="activites">
+    <RouterLink v-for="b in blancs" :key="b.l.id" :to="lienTest(b.l.id, 'blanc')">
+      <span class="pastille" :style="{ background: couleur(b.l) }">{{ numero(b.l) }}</span>
+      <span class="corps">
+        <span class="ligne"><strong>Cours {{ numero(b.l) }}</strong><span>{{ b.etat }}</span></span>
+        <small>{{ b.l.titre }}</small>
+        <small v-if="b.detail">{{ b.detail }}</small>
+      </span>
     </RouterLink>
   </div>
 

@@ -2,7 +2,7 @@
 import Jauge from '../components/Jauge.vue'
 import JpText from '../components/JpText.vue'
 import { ACTIVITES, couleur, enTete, lessonParId } from '../content/lessons'
-import { avancement, noteDe } from '../srs/avancement'
+import { avancement, etatTest, lienTest } from '../srs/avancement'
 import { progression } from '../srs/store'
 
 const props = defineProps<{ id: string }>()
@@ -34,16 +34,18 @@ const enCours = (type: string) => progression.session?.retour === lien(type)
 
     <h2>Mini-tests</h2>
     <div class="activites">
-      <RouterLink v-if="lesson.miniTest" :to="lien('minitest')">
+      <RouterLink v-if="lesson.miniTest" :to="lienTest(lesson.id, 'minitest')">
         <span class="corps">
-          <span class="ligne"><strong>Mini-test du cours</strong><span>{{ enCours('minitest') ? 'En cours' : (noteDe(`${lesson.id}/minitest`) ?? 'À passer') }}</span></span>
+          <span class="ligne"><strong>Mini-test du cours</strong><span>{{ etatTest(lesson.id, 'minitest').etat }}</span></span>
           <small>Celui passé en classe, {{ lesson.miniTest.length }} questions</small>
+          <small v-if="etatTest(lesson.id, 'minitest').detail">{{ etatTest(lesson.id, 'minitest').detail }}</small>
         </span>
       </RouterLink>
-      <RouterLink :to="lien('blanc')">
+      <RouterLink :to="lienTest(lesson.id, 'blanc')">
         <span class="corps">
-          <span class="ligne"><strong>Mini-test blanc</strong><span>{{ enCours('blanc') ? 'En cours' : (noteDe(`${lesson.id}/blanc`) ?? 'À passer') }}</span></span>
-          <small>Tiré au hasard, au même format</small>
+          <span class="ligne"><strong>Mini-test blanc</strong><span>{{ etatTest(lesson.id, 'blanc').etat }}</span></span>
+          <small>Nouveau tirage à chaque fois, au même format</small>
+          <small v-if="etatTest(lesson.id, 'blanc').detail">{{ etatTest(lesson.id, 'blanc').detail }}</small>
         </span>
       </RouterLink>
     </div>
