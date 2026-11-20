@@ -79,7 +79,7 @@
   "prochainCours": {
     "annonce": [],
     "devoirs": [
-      "S'entraîner à écrire les hiragana あ・い・う・え・お.",
+      { "texte": "S'entraîner à écrire les hiragana あ・い・う・え・お.", "activites": ["trace"] },
       "S'entraîner à se présenter à l'oral : はじめまして。わたしは 〜です。よろしく おねがいします。"
     ]
   }

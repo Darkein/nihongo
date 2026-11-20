@@ -4,8 +4,9 @@ import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { toRomaji } from 'wanakana'
 import Barre from './Barre.vue'
 
-const props = defineProps<{ kana: string; rappel?: boolean }>()
-defineEmits<{ fini: [juste: boolean] }>()
+// `libre` : pas de barre d'exercice, le parent enchaîne. `contour` : opacité du modèle, de 0 à 1.
+const props = withDefaults(defineProps<{ kana: string; rappel?: boolean; libre?: boolean; contour?: number }>(), { contour: 1 })
+const emit = defineEmits<{ fini: [juste: boolean, erreurs: number] }>()
 
 const MAX_ERREURS = 2
 const cible = ref<HTMLDivElement>()
@@ -23,7 +24,12 @@ function couleur(nom: string) {
 
 function quiz() {
   erreurs.value = undefined
-  writer?.quiz({ onComplete: (bilan) => (erreurs.value = bilan.totalMistakes) })
+  writer?.quiz({
+    onComplete: (bilan) => {
+      erreurs.value = bilan.totalMistakes
+      if (props.libre) emit('fini', bilan.totalMistakes <= MAX_ERREURS, bilan.totalMistakes)
+    },
+  })
 }
 
 onMounted(async () => {
@@ -35,10 +41,10 @@ onMounted(async () => {
     height: taille,
     padding: 16,
     showCharacter: false,
-    showOutline: !props.rappel,
+    showOutline: !props.rappel && props.contour > 0,
     showHintAfterMisses: 2,
     strokeColor: couleur('--encre'),
-    outlineColor: couleur('--trait'),
+    outlineColor: couleur('--trait').replace('rgb(', 'rgba(').replace(')', `, ${props.contour})`),
     drawingColor: couleur('--accent'),
     highlightColor: couleur('--accent'),
     drawingWidth: 24,
@@ -53,6 +59,7 @@ async function montrer() {
   await writer?.animateCharacter()
   quiz()
 }
+defineExpose({ montrer })
 </script>
 
 <template>
@@ -61,11 +68,12 @@ async function montrer() {
   </p>
   <div ref="cible" class="trace"></div>
   <Barre
+    v-if="!libre"
     :juste="erreurs === undefined ? undefined : erreurs <= MAX_ERREURS"
     libelle="Suivant"
     :inactif="erreurs === undefined"
     :audio="kana"
-    @action="$emit('fini', erreurs! <= MAX_ERREURS)"
+    @action="emit('fini', erreurs! <= MAX_ERREURS, erreurs!)"
   >
     <template #aide>Trait par trait, dans l'ordre.</template>
     <template #secondaire>

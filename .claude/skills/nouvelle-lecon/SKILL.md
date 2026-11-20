@@ -26,6 +26,7 @@ Transforme les pièces jointes au prompt en `content/lessons/cours-NN/lesson.jso
    - Écris les phrases avec une espace après chaque particule (`わたしは がくせいです`) : l'aide rōmaji s'en sert pour lire は « wa ».
    - `reponses` : en kana, sans rōmaji. Liste chaque variante réellement acceptable. Espaces, ponctuation, katakana/hiragana et じゃ/では sont déjà tolérés par la correction.
    - `prochainCours` : `annonce` = ce que le récap annonce pour la séance suivante, `devoirs` = les devoirs. Rien d'autre.
+     Un devoir faisable dans l'app s'écrit `{ "texte": "…", "activites": ["kana", "trace"] }` (parmi `kana` = lecture, `trace` = écriture, `vocabulaire`, `exercices`), sinon c'est une simple chaîne.
 4. Un mini-test passé en début de séance évalue le cours **précédent** : ajoute-le dans le champ `miniTest` de la leçon qu'il évalue, pas dans la nouvelle. Ignore les réponses manuscrites et le nom de l'élève. Une question « reliez » devient une série de `qcm`.
 5. Vérifie : `npm ci && npm run validate && npm test && npm run build`. Corrige jusqu'à ce que tout passe.
 6. Crée la branche `lecon/cours-NN`, committe uniquement `content/lessons/`, pousse, et ouvre une PR avec `gh pr create`. Dans la description : ce qui a été retranscrit, ce qui a été écarté, et les points à relire (lectures incertaines, corrigés à confirmer).

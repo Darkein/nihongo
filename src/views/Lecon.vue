@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import Chevron from '../components/Chevron.vue'
+import Devoirs from '../components/Devoirs.vue'
 import Jauge from '../components/Jauge.vue'
-import JpText from '../components/JpText.vue'
-import { ACTIVITES, couleur, enTete, lessonParId } from '../content/lessons'
+import { ACTIVITES, enTete, lessonParId } from '../content/lessons'
 import { avancement, etatTest, lienTest } from '../srs/avancement'
 import { progression } from '../srs/store'
 
@@ -14,15 +15,16 @@ const enCours = (type: string) => progression.session?.retour === lien(type)
 <template>
   <p v-if="!lesson">Leçon introuvable.</p>
   <template v-else>
-    <header class="affiche" :style="{ background: couleur(lesson) }">
+    <span class="filigrane" aria-hidden="true">{{ lesson.kana[0]?.[0] }}</span>
+    <RouterLink class="retour" to="/lecons"><Chevron gauche />Leçons</RouterLink>
+    <header class="affiche">
       <p class="sur">{{ enTete(lesson) }}</p>
       <h1>{{ lesson.titre }}</h1>
       <p class="ligne"><span>{{ avancement(lesson).pct }} % acquis</span></p>
       <Jauge :pct="avancement(lesson).pct" />
-      <span class="geant" aria-hidden="true">{{ lesson.kana[0]?.[0] }}</span>
     </header>
 
-    <h2>S'entraîner</h2>
+    <h2>Activités</h2>
     <div class="activites">
       <RouterLink v-for="a in ACTIVITES" :key="a.type" :to="lien(a.type)">
         <span class="corps">
@@ -54,16 +56,13 @@ const enCours = (type: string) => progression.session?.retour === lien(type)
     <div class="activites">
       <RouterLink :to="`/lecon/${lesson.id}/resume`">
         <span class="corps">
-          <span class="ligne"><strong>Résumé, kana et vocabulaire</strong><span aria-hidden="true">›</span></span>
+          <span class="ligne"><strong>Résumé, kana et vocabulaire</strong><Chevron /></span>
           <small>{{ lesson.resume.map((s) => s.titre).join(', ') }}</small>
         </span>
       </RouterLink>
     </div>
 
     <h2>Devoirs donnés à ce cours</h2>
-    <ul class="liste">
-      <li v-for="a in lesson.prochainCours.annonce" :key="a"><strong>Annoncé :</strong> <JpText :texte="a" /></li>
-      <li v-for="d in lesson.prochainCours.devoirs" :key="d"><JpText :texte="d" /></li>
-    </ul>
+    <Devoirs :lesson="lesson" />
   </template>
 </template>

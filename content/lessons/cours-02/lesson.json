@@ -97,7 +97,7 @@
       "Mini-test de 5 à 10 minutes en début de cours, à corriger soi-même : lire des hiragana et écrire leur rōmaji, puis lire des mots en rōmaji et les écrire en hiragana."
     ],
     "devoirs": [
-      "Exercices d'écriture sur les lignes K et S.",
+      { "texte": "Exercices d'écriture sur les lignes K et S.", "activites": ["trace"] },
       "Préparer une courte présentation orale d'une personnalité connue : nom, profession, nationalité, âge."
     ]
   }

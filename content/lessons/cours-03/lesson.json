@@ -98,9 +98,9 @@
   "prochainCours": {
     "annonce": ["Reprise de la partie Écriture et prononciation (lignes TA et NA, sons voisés) au début du cours."],
     "devoirs": [
-      "S'entraîner à écrire les lignes TA et NA en soignant les tracés (tome, hane, harai).",
+      { "texte": "S'entraîner à écrire les lignes TA et NA en soignant les tracés (tome, hane, harai).", "activites": ["trace"] },
       "Faire les exercices de la page 10 du manuel rouge, si possible.",
-      "S'entraîner à la question-réponse : かれは かしゅですか。 → いいえ、かしゅじゃ ありません。サッカーせんしゅです。"
+      { "texte": "S'entraîner à la question-réponse : かれは かしゅですか。 → いいえ、かしゅじゃ ありません。サッカーせんしゅです。", "activites": ["exercices"] }
     ]
   }
 }

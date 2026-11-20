@@ -40,6 +40,12 @@ const Tuiles = z.strictObject({
 
 export const ExerciceSchema = z.union([Qcm, Saisie, Transformation, Tuiles])
 
+// Un devoir faisable dans l'app pointe vers les activités de sa leçon qui le couvrent.
+const Devoir = z.union([
+  texte,
+  z.strictObject({ texte, activites: z.array(z.enum(['kana', 'trace', 'vocabulaire', 'exercices'])).min(1) }),
+])
+
 export const LessonSchema = z.strictObject({
   id: z.string().regex(/^cours-\d{2}$/),
   date: z.iso.date().optional(),
@@ -61,7 +67,7 @@ export const LessonSchema = z.strictObject({
     .optional(),
   exercices: z.array(ExerciceSchema),
   miniTest: z.array(ExerciceSchema).optional(),
-  prochainCours: z.strictObject({ annonce: z.array(texte), devoirs: z.array(texte) }),
+  prochainCours: z.strictObject({ annonce: z.array(texte), devoirs: z.array(Devoir) }),
 })
 
 export type Exercice = z.infer<typeof ExerciceSchema>
