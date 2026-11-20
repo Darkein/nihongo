@@ -15,13 +15,13 @@ const enCours = (type: string) => progression.session?.retour === lien(type)
 <template>
   <p v-if="!lesson">Leçon introuvable.</p>
   <template v-else>
+    <span class="filigrane" aria-hidden="true">{{ lesson.kana[0]?.[0] }}</span>
     <RouterLink class="retour" to="/lecons"><Chevron gauche />Leçons</RouterLink>
     <header class="affiche">
       <p class="sur">{{ enTete(lesson) }}</p>
       <h1>{{ lesson.titre }}</h1>
       <p class="ligne"><span>{{ avancement(lesson).pct }} % acquis</span></p>
       <Jauge :pct="avancement(lesson).pct" />
-      <span class="geant" aria-hidden="true">{{ lesson.kana[0]?.[0] }}</span>
     </header>
 
     <h2>Activités</h2>

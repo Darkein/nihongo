@@ -202,17 +202,12 @@ h2 {
   padding: 18px 18px 20px;
   text-decoration: none;
 }
-.affiche .geant,
 .carte-lecon .geant {
   color: var(--jaune-marque);
 }
 .affiche .jauge i,
 .carte-lecon .jauge i {
   background: light-dark(var(--encre), var(--jaune));
-}
-.affiche {
-  min-height: 190px;
-  padding-right: 132px;
 }
 .affiche .sur,
 .carte-lecon .sur {
@@ -225,17 +220,12 @@ h2 {
 }
 .geant {
   position: absolute;
-  right: 4px;
-  bottom: -28px;
-  font-size: 124px;
+  top: -12px;
+  right: -6px;
+  font-size: 128px;
   font-weight: 900;
   line-height: 1;
   pointer-events: none;
-}
-.geant.petit {
-  font-size: 96px;
-  bottom: auto;
-  top: -12px;
 }
 .carte-lecon {
   margin-bottom: 12px;

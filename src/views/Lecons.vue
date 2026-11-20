@@ -14,7 +14,7 @@ const sur =
   <EnTete :sur="sur" titre="Leçons" filigrane="授業" />
   <div class="grille-lecons">
     <RouterLink v-for="l in [...lessons].reverse()" :key="l.id" class="carte-lecon" :to="`/lecon/${l.id}`">
-      <span class="geant petit" aria-hidden="true">{{ l.kana[0]?.[0] }}</span>
+      <span class="geant" aria-hidden="true">{{ l.kana[0]?.[0] }}</span>
       <p class="sur">Cours {{ numero(l) }}<template v-if="l.date">, {{ dateDe(l) }}</template></p>
       <h2>{{ l.titre }}</h2>
       <p class="ligne">
