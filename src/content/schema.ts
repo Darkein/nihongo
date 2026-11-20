@@ -71,7 +71,8 @@ export const LessonSchema = z.strictObject({
     .optional(),
   exercices: z.array(ExerciceSchema),
   miniTest: z.array(ExerciceSchema).optional(),
-  prochainCours: z.strictObject({ annonce: z.array(texte), devoirs: z.array(Devoir) }),
+  // date : à renseigner quand la séance suivante n'a pas lieu une semaine après (vacances).
+  prochainCours: z.strictObject({ date: z.iso.date().optional(), annonce: z.array(texte), devoirs: z.array(Devoir) }),
 })
 
 export type Exercice = z.infer<typeof ExerciceSchema>

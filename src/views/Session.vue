@@ -18,9 +18,8 @@ import {
   type Carte,
 } from '../content/lessons'
 import type { Exercice } from '../content/schema'
-import { aReviser } from '../srs/leitner'
-import { noteDe } from '../srs/avancement'
-import { aujourdhui, enregistrer, noterTest, progression } from '../srs/store'
+import { cartesDuJour, noteDe } from '../srs/avancement'
+import { enregistrer, noterTest, progression } from '../srs/store'
 
 const route = useRoute()
 const router = useRouter()
@@ -39,7 +38,7 @@ const titre = mode === 'jour' ? 'Révision du jour' : mode === 'libre' ? `Tous l
 const blanc = (e: Exercice): Carte => ({ id: `blanc/${e.id}`, categorie: 'minitest', lesson: lesson!, genre: 'exercice', exercice: e })
 
 function nouvelles(): Carte[] {
-  if (mode === 'jour') return melanger(aReviser(toutesLesCartes(), progression.cartes, aujourdhui()))
+  if (mode === 'jour') return melanger(cartesDuJour())
   if (mode === 'libre') return melanger(toutesLesCartes().filter((c) => c.categorie === type))
   if (!lesson) return []
   if (type === 'blanc') return miniTestBlanc(lesson).map(blanc)

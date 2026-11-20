@@ -1,6 +1,7 @@
-import { cartesDe, type Categorie } from '../content/lessons'
+import { cartesDe, derniere, toutesLesCartes, type Categorie } from '../content/lessons'
 import type { Lesson } from '../content/schema'
-import { progression, type Note } from './store'
+import { aReviser } from './leitner'
+import { aujourdhui, progression, type Note } from './store'
 
 export type Avancement = { fait: number; total: number; pct: number; texte: string }
 
@@ -35,4 +36,11 @@ export function etatTest(lessonId: string, type: 'minitest' | 'blanc'): { etat: 
   if (!derniere) return { etat: 'À passer' }
   const avant = notes.slice(0, -1).map((n) => n.note).join(' · ')
   return { etat: sur10(derniere), detail: `Passé le ${jour(derniere.date)}` + (avant ? `, notes précédentes : ${avant}` : '') }
+}
+
+// Les cartes du dernier cours passent devant : c'est lui qu'on travaille d'ici la séance suivante.
+export function cartesDuJour() {
+  const cartes = toutesLesCartes()
+  const ordre = [...cartes.filter((c) => c.lesson === derniere), ...cartes.filter((c) => c.lesson !== derniere)]
+  return aReviser(ordre, progression.cartes, aujourdhui())
 }
