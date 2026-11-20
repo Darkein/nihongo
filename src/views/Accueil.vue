@@ -4,8 +4,10 @@ import Chevron from '../components/Chevron.vue'
 import Devoirs from '../components/Devoirs.vue'
 import EnTete from '../components/EnTete.vue'
 import JpText from '../components/JpText.vue'
-import { ACTIVITES, cartesDe, derniere, lessons, numero, toutesLesCartes } from '../content/lessons'
+import { ACTIVITES, cartesDe, derniere, filigrane, lessons, numero, toutesLesCartes, type Categorie } from '../content/lessons'
 import { dateJaponaise } from '../content/date'
+import type { Lesson } from '../content/schema'
+import { lecture } from '../content/text'
 import { cartesDuJour, lienTest } from '../srs/avancement'
 import { ajouterJours } from '../srs/leitner'
 import { aujourdhui, progression } from '../srs/store'
@@ -49,22 +51,39 @@ const rates = computed(() => {
   return { visibles: etiquettes.slice(0, MAX_RATES), autres: Math.max(0, etiquettes.length - MAX_RATES) + exercices }
 })
 
+// Un aperçu de ce que l'activité fait travailler, pour savoir à quoi on s'attaque avant de l'ouvrir.
+const apercu = (l: Lesson, type: Categorie) =>
+  type === 'vocabulaire'
+    ? l.mots.slice(0, 4).map((m) => lecture(m.jp)).join('・')
+    : type === 'exercices'
+      ? pluriel(l.exercices.length, 'question')
+      : l.kana.join(' ')
+
 // Le dernier cours est en cours d'apprentissage : seuls les précédents peuvent avoir des trous.
-const trous = computed(() =>
+const rattrapages = computed(() =>
   lessons
     .filter((l) => l !== derniere)
-    .flatMap((l) => {
-      const jamais = ACTIVITES.filter((a) => {
-        const cartes = cartesDe(l).filter((c) => c.categorie === a.type)
-        return cartes.length && cartes.every((c) => !progression.cartes[c.id])
-      }).map((a) => ({ cle: `${l.id}/${a.type}`, l, nom: a.nom, etat: 'jamais fait', vers: `/session?lecon=${l.id}&type=${a.type}` }))
+    .map((l) => {
+      const presentes = ACTIVITES.filter((a) => cartesDe(l).some((c) => c.categorie === a.type))
+      const jamais = presentes
+        .filter((a) => cartesDe(l).every((c) => c.categorie !== a.type || !progression.cartes[c.id]))
+        .map((a) => ({
+          cle: a.type,
+          repere: a.repere,
+          nom: a.nom,
+          apercu: apercu(l, a.type),
+          ja: a.type !== 'exercices',
+          vers: `/session?lecon=${l.id}&type=${a.type}`,
+        }))
       const note = progression.tests[`${l.id}/blanc`]?.at(-1)
       const blanc =
         note && note.note < 7
-          ? [{ cle: `${l.id}/blanc`, l, nom: 'Mini-test blanc', etat: `${note.note} / 10`, vers: lienTest(l.id, 'blanc') }]
+          ? [{ cle: 'blanc', repere: '試', nom: 'Mini-test blanc', apercu: `Dernière note : ${note.note} / 10`, ja: false, vers: lienTest(l.id, 'blanc') }]
           : []
-      return [...jamais, ...blanc]
-    }),
+      const etat = jamais.length === presentes.length ? 'Pas commencé' : jamais.length ? `Reste ${jamais.length}` : ''
+      return { l, etat, trous: [...jamais, ...blanc] }
+    })
+    .filter((r) => r.trous.length),
 )
 </script>
 
@@ -101,13 +120,17 @@ const trous = computed(() =>
       <li v-if="rates.autres" class="autres">+{{ rates.autres }}</li>
     </ul>
   </template>
-  <div v-if="trous.length" class="activites">
-    <RouterLink v-for="t in trous" :key="t.cle" :to="t.vers">
-      <span class="pastille">{{ numero(t.l) }}</span>
-      <span class="corps">
-        <span class="ligne"><strong>{{ t.nom }}</strong><span class="manque">{{ t.etat }}</span></span>
-      </span>
-    </RouterLink>
-  </div>
-  <p v-if="!trous.length && !rates.visibles.length && !rates.autres" class="calme">Rien à consolider pour l’instant.</p>
+  <ul v-if="rattrapages.length" class="frise">
+    <li v-for="r in rattrapages" :key="r.l.id">
+      <span class="geant" lang="ja" aria-hidden="true">{{ filigrane(r.l) }}</span>
+      <p class="ligne"><strong>Cours {{ numero(r.l) }}</strong><span>{{ r.etat }}</span></p>
+      <p class="titre">{{ r.l.titre }}</p>
+      <RouterLink v-for="t in r.trous" :key="t.cle" :to="t.vers">
+        <span class="repere" lang="ja" aria-hidden="true">{{ t.repere }}</span>
+        <span class="corps"><strong>{{ t.nom }}</strong><small :lang="t.ja ? 'ja' : undefined">{{ t.apercu }}</small></span>
+        <Chevron />
+      </RouterLink>
+    </li>
+  </ul>
+  <p v-if="!rattrapages.length && !rates.visibles.length && !rates.autres" class="calme">Rien à consolider pour l’instant.</p>
 </template>
