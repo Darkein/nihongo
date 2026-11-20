@@ -27,7 +27,7 @@ Transforme les pièces jointes au prompt en `content/lessons/cours-NN/lesson.jso
    - `exercices` : au moins 2 `qcm`, 2 `saisie` et 2 `tuiles` portant sur la grammaire et le vocabulaire du cours. Les exercices du manuel deviennent des `transformation` (`serie` = nom de l'exercice, `exemple` = l'exemple du livre, un exercice par numéro) ; les tableaux de personnages vont dans `fiches`, sans les illustrations.
    - Écris les phrases avec une espace après chaque particule (`わたしは がくせいです`) : l'aide rōmaji s'en sert pour lire は « wa ».
    - `reponses` : en kana, sans rōmaji. Liste chaque variante réellement acceptable. Espaces, ponctuation, katakana/hiragana et じゃ/では sont déjà tolérés par la correction.
-   - `prochainCours` : `annonce` = ce que le récap annonce pour la séance suivante, `devoirs` = les devoirs. Rien d'autre.
+   - `prochainCours` : `annonce` = ce que le récap annonce pour la séance suivante, `devoirs` = les devoirs, `date` = la date de la séance suivante seulement si elle n'a pas lieu une semaine après (vacances). Rien d'autre.
      Un devoir faisable dans l'app s'écrit `{ "texte": "…", "activites": ["kana", "trace"] }` (parmi `kana` = lecture, `trace` = écriture, `vocabulaire`, `exercices`), sinon c'est une simple chaîne.
 4. Un mini-test passé en début de séance évalue le cours **précédent** : ajoute-le dans le champ `miniTest` de la leçon qu'il évalue, pas dans la nouvelle. Ignore les réponses manuscrites et le nom de l'élève. Une question « reliez » devient une série de `qcm`.
 5. Vérifie : `npm ci && npm run validate && npm test && npm run build`. Corrige jusqu'à ce que tout passe.
