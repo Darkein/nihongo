@@ -69,6 +69,10 @@ export const LessonSchema = z.strictObject({
       }),
     )
     .optional(),
+  // Ce que le cours enseigne pour compter : nombres jusqu'à « jusqua », compteurs vus (さい pour l'âge).
+  nombres: z
+    .strictObject({ jusqua: z.number().int().positive().optional(), compteurs: z.array(z.enum(['さい'])).min(1).optional() })
+    .optional(),
   exercices: z.array(ExerciceSchema),
   miniTest: z.array(ExerciceSchema).optional(),
   // date : à renseigner quand la séance suivante n'a pas lieu une semaine après (vacances).

@@ -82,6 +82,7 @@
     { "nom": "カリナ", "pays": "インドネシア", "metier": "{学生|がくせい}", "organisation": "{富士大学|ふじだいがく}" },
     { "nom": "サントス", "pays": "ブラジル", "metier": "{会社員|かいしゃいん}", "organisation": "ブラジルエアー" }
   ],
+  "nombres": { "jusqua": 50 },
   "exercices": [
     { "type": "qcm", "id": "wa-prononciation", "question": "Comment se prononce は quand c'est une particule ?", "choix": ["ha", "wa", "ba"], "reponse": 1 },
     { "type": "qcm", "id": "verbe-etre", "question": "Dans わたしは がくせいです, quel mot joue le rôle du verbe être ?", "choix": ["は", "わたし", "です"], "reponse": 2 },
