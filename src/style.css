@@ -133,7 +133,11 @@ small {
   z-index: -1;
   right: max(-22px, calc(50vw - 17rem - 22px));
   bottom: 90px;
-  writing-mode: vertical-rl;
+  /* Un caractère par ligne plutôt que writing-mode vertical : une boîte fixe en vertical
+     peut être mesurée à hauteur nulle, et les caractères se chevauchent alors. */
+  width: 1em;
+  word-break: break-all;
+  text-align: center;
   font-size: 190px;
   font-weight: 900;
   line-height: 1;
