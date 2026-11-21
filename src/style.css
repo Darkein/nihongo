@@ -12,7 +12,7 @@
   --jaune: #ffd400;
   /* Jaune des marques (kana, pastilles) : plus soutenu en clair pour se détacher du blanc. */
   --jaune-marque: light-dark(#e7c002, #ffd400);
-  --police: 'Avenir Next', 'Hiragino Sans', 'Noto Sans JP', 'Yu Gothic', system-ui, sans-serif;
+  --police: 'Figtree Variable', 'Hiragino Sans', 'Noto Sans JP', 'Yu Gothic', system-ui, sans-serif;
 }
 :root[data-theme='clair'] {
   color-scheme: light;
