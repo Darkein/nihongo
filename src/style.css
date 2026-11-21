@@ -1057,7 +1057,9 @@ h2 + .sous-titre {
   padding: 16px 16px 8px;
   border: var(--trait-epais);
   border-radius: 20px;
-  background: light-dark(#fff, var(--surface));
+  /* Opaque en sombre (même teinte que --surface sur le fond de l'accueil) : le filigrane
+     de la page ne doit pas se mêler à celui de la carte. */
+  background: light-dark(#fff, #322e1d);
   color: var(--encre);
 }
 .frise .geant {
