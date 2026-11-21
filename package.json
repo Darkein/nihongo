@@ -10,6 +10,7 @@
     "validate": "node scripts/validate-content.ts"
   },
   "dependencies": {
+    "@fontsource-variable/figtree": "^5.3.0",
     "hanzi-writer": "^3.7.3",
     "vue": "^3.5.46",
     "vue-router": "^5.5.1",
