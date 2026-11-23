@@ -18,8 +18,8 @@ import {
   type Carte,
 } from '../content/lessons'
 import type { Exercice } from '../content/schema'
-import { cartesDuJour, noteDe } from '../srs/avancement'
-import { enregistrer, noterTest, progression } from '../srs/store'
+import { cartesDuJour, cocherDevoirsFinis, noteDe } from '../srs/avancement'
+import { enregistrer, noterPassage, noterTest, progression } from '../srs/store'
 
 const route = useRoute()
 const router = useRouter()
@@ -96,12 +96,18 @@ const quitter = () => (router.options.history.state.back ? router.back() : route
 
 function fini(juste: boolean) {
   if (juste) justes.value++
-  if (mode !== 'libre' && !carte.value.id.startsWith('blanc/')) enregistrer(carte.value.id, juste)
+  // Seule la révision du jour fait avancer le planning : refaire une activité ou un test ne le dérègle pas.
+  if (mode === 'jour') enregistrer(carte.value.id, juste)
   index.value++
   // Sur petit écran, on a défilé jusqu'à la correction : la question suivante doit repartir du haut.
   window.scrollTo(0, 0)
   memoriser()
-  if (index.value === cartes.length && estTest && lesson) noterTest(`${lesson.id}/${type}`, note.value)
+  if (index.value < cartes.length || !lesson) return
+  if (estTest) noterTest(`${lesson.id}/${type}`, note.value)
+  else {
+    noterPassage(`${lesson.id}/${type}`, justes.value, cartes.length)
+    cocherDevoirsFinis(lesson, type!)
+  }
 }
 
 function recommencer() {
@@ -159,7 +165,7 @@ function recommencer() {
         <p v-if="estTest" class="note">{{ note }}<small>/10</small></p>
         <h1>{{ justes }} juste{{ justes > 1 ? 's' : '' }} sur {{ cartes.length }}</h1>
         <p v-if="notePrecedente">Note précédente : {{ notePrecedente }}</p>
-        <p v-if="mode !== 'libre' && justes < cartes.length">Les cartes ratées reviendront demain dans la révision du jour.</p>
+        <p v-if="mode === 'jour' && justes < cartes.length">Les cartes ratées reviendront demain dans la révision du jour.</p>
       </template>
       <h1 v-else>Rien à faire dans cette série</h1>
       <button class="primaire" type="button" @click="quitter">Terminer</button>
