@@ -3,7 +3,8 @@
   --fond: light-dark(#ffffff, #121212);
   --encre: light-dark(#111111, #f5f3ee);
   --doux: light-dark(#55524c, #b4b0a6);
-  --surface: light-dark(#f1efe8, #242321);
+  /* Nettement plus soutenu que le filigrane, sinon les cartes s'y fondent. */
+  --surface: light-dark(#e8e4d9, #2e2c29);
   --trait: light-dark(#cfccc3, #4a4844);
   --accent: light-dark(#e0245e, #ff7aa2);
   --juste: light-dark(#0f7a4d, #6fd3a3);
@@ -142,10 +143,10 @@ small {
   text-align: center;
   font: 900 190px/1 var(--police-filigrane);
   pointer-events: none;
-  color: light-dark(#11111112, #f5f3ee12);
+  color: light-dark(#11111108, #f5f3ee08);
 }
 :root.accueil .filigrane {
-  color: light-dark(#11111112, #ffd40012);
+  color: light-dark(#11111108, #ffd40008);
 }
 .version {
   margin-top: 32px;
@@ -199,13 +200,14 @@ h2 {
   position: relative;
   display: block;
   overflow: hidden;
-  border: var(--trait-epais);
   border-radius: 20px;
-  background: var(--fond);
+  background: var(--surface);
   padding: 18px 18px 20px;
   text-decoration: none;
 }
 .carte-lecon .geant {
+  top: -10px;
+  font-size: 96px;
   color: var(--jaune-marque);
 }
 .carte-lecon .jauge i {
@@ -510,11 +512,11 @@ h2 {
   color: var(--doux);
 }
 .grille-tests .a-passer {
-  background: none;
+  background: var(--fond);
   box-shadow: inset 0 0 0 2px var(--trait);
 }
 .grille-tests .en-cours {
-  background: none;
+  background: var(--fond);
   box-shadow: inset 0 0 0 2px var(--encre);
 }
 .grille-tests .reussi,
@@ -682,6 +684,7 @@ rt {
 }
 .barre {
   height: 16px;
+  background: var(--fond);
   /* Piste vide en contour : un fond pâle se confondait avec le filigrane de la page. */
   box-shadow: inset 0 0 0 2px var(--encre);
   border-radius: 999px;
