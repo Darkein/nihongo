@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { estJuste, lecture, romaji, segments } from '../src/content/text.ts'
+import { aDire, estJuste, lecture, romaji, segments } from '../src/content/text.ts'
 
 test('le balisage furigana se découpe en segments', () => {
   expect(segments('ミラーさんは {会社員|かいしゃいん}です')).toEqual([
@@ -9,6 +9,12 @@ test('le balisage furigana se découpe en segments', () => {
   ])
   expect(lecture('{山田|やまだ}さん')).toBe('やまださん')
   expect(romaji('{先生|せんせい}')).toBe('sensei')
+})
+
+test('la synthèse vocale dicte la lecture du cours et la particule は en « wa »', () => {
+  expect(aDire('{人|じん}')).toBe('じん')
+  expect(aDire('ミラーさんは {会社員|かいしゃいん}です')).toBe('ミラーさんわ かいしゃいんです')
+  expect(aDire('はな')).toBe('はな')
 })
 
 test('une réponse en kana ignore espaces, ponctuation, katakana et furigana', () => {

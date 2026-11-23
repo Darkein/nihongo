@@ -17,10 +17,11 @@ export function segments(s: string): Segment[] {
 }
 
 export const lecture = (s: string) => s.replace(FURIGANA, '$2')
-export const sansFurigana = (s: string) => s.replace(FURIGANA, '$1')
 // Les particules は et を, suivies d'une espace dans le contenu, se lisent « wa » et « o ».
 const PARTICULE_WA = /(?<=\S)は(?=[\s\u3000、。？?]|$)/g
-export const romaji = (s: string) => toRomaji(lecture(s).replace(PARTICULE_WA, 'わ').replace(/を/g, 'お'))
+// Le kanji seul se lit mal en synthèse vocale ({人|じん} → « hito ») : on dicte la lecture du cours.
+export const aDire = (s: string) => lecture(s).replace(PARTICULE_WA, 'わ')
+export const romaji = (s: string) => toRomaji(aDire(s).replace(/を/g, 'お'))
 
 const PONCTUATION = /[\s　。、．，,.?？!！…・「」]/g
 
