@@ -12,6 +12,14 @@ describe('tracés des kana', () => {
     expect(hors.map(([k]) => k)).toEqual([])
   })
 
+  // hanzi-writer mesure la distance aux points de la médiane, pas aux segments : trop espacés, même un tracé parfait est refusé (れ, わ, た…).
+  it('a des points de médiane espacés de 50 au plus', () => {
+    const espaces = Object.entries(donnees).filter(([, t]) =>
+      t.medians.some((m) => m.slice(1).some(([x, y], i) => Math.hypot(x - m[i][0], y - m[i][1]) > 51)),
+    )
+    expect(espaces.map(([k]) => k)).toEqual([])
+  })
+
   it('a autant de médianes que de traits', () => {
     for (const [k, t] of Object.entries(donnees)) expect(t.medians.length, k).toBe(t.strokes.length)
   })
