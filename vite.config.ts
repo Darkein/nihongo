@@ -10,8 +10,12 @@ export default defineConfig({
     vue(),
     VitePWA({
       registerType: 'autoUpdate',
+      // Enregistrement fait dans src/main.ts (rechargement auto + vérification au retour sur l'app).
+      injectRegister: false,
       includeAssets: ['favicon-16.png', 'favicon-32.png', 'apple-touch-icon.png'],
       workbox: {
+        clientsClaim: true,
+        skipWaiting: true,
         globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
         // Murecho est découpée en ~120 morceaux : seuls ceux affichés sont téléchargés, puis gardés en cache.
         globIgnores: ['**/murecho-*.woff2'],
