@@ -66,7 +66,7 @@ const rattrapages = computed(() =>
     .map((l) => {
       const presentes = ACTIVITES.filter((a) => cartesDe(l).some((c) => c.categorie === a.type))
       const jamais = presentes
-        .filter((a) => cartesDe(l).every((c) => c.categorie !== a.type || !progression.cartes[c.id]))
+        .filter((a) => !progression.passages[`${l.id}/${a.type}`])
         .map((a) => ({
           cle: a.type,
           repere: a.repere,

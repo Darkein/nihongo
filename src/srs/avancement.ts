@@ -1,20 +1,21 @@
-import { cartesDe, derniere, toutesLesCartes, type Categorie } from '../content/lessons'
+import { cartesDe, derniere, devoirsDe, toutesLesCartes, type Categorie } from '../content/lessons'
 import type { Lesson } from '../content/schema'
 import { aReviser } from './leitner'
-import { aujourdhui, progression, type Note } from './store'
+import { aujourdhui, cocherDevoir, progression, type Note } from './store'
 
-export type Avancement = { fait: number; total: number; pct: number; texte: string }
+// Part des cartes réussies à leur dernière révision : la maîtrise, qui peut baisser.
+export function avancement(lesson: Lesson): { pct: number } {
+  const cartes = cartesDe(lesson).filter((c) => c.categorie !== 'minitest')
+  const acquises = cartes.filter((c) => progression.cartes[c.id]?.ok).length
+  return { pct: cartes.length ? Math.round((acquises / cartes.length) * 100) : 0 }
+}
 
-export function avancement(lesson: Lesson, categorie?: Categorie): Avancement {
-  const cartes = cartesDe(lesson).filter((c) => (categorie ? c.categorie === categorie : c.categorie !== 'minitest'))
-  const fait = cartes.filter((c) => progression.cartes[c.id]?.ok).length
-  const total = cartes.length
-  return {
-    fait,
-    total,
-    pct: total ? Math.round((fait / total) * 100) : 0,
-    texte: total && fait === total ? 'Fait' : `${fait} / ${total}`,
-  }
+// Préparation d'une activité : faite dès un passage complet, quel que soit le score, et elle le reste.
+export function passage(lesson: Lesson, type: Categorie) {
+  const total = cartesDe(lesson).filter((c) => c.categorie === type).length
+  const dernier = progression.passages[`${lesson.id}/${type}`]
+  const texte = dernier ? `${dernier.justes} / ${dernier.total} ✓` : `${total} cartes`
+  return { total, dernier, texte }
 }
 
 const sur10 = (n: Note) => `${n.note} / 10`
@@ -23,6 +24,14 @@ const jour = (date: string) => new Date(date).toLocaleDateString('fr-FR', { day:
 export const noteDe = (cle: string) => {
   const n = progression.tests[cle]?.at(-1)
   return n ? sur10(n) : undefined
+}
+
+// Le passage qui complète les activités d'un devoir le coche ; on peut toujours le décocher ensuite.
+export function cocherDevoirsFinis(lesson: Lesson, type: string) {
+  for (const d of devoirsDe(lesson)) {
+    const activites = d.activites as string[]
+    if (activites.includes(type) && activites.every((t) => progression.passages[`${lesson.id}/${t}`])) cocherDevoir(d.cle, true)
+  }
 }
 
 export const lienTest = (lessonId: string, type: 'minitest' | 'blanc') => `/session?lecon=${lessonId}&type=${type}`

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ACTIVITES, devoirsDe } from '../content/lessons'
 import type { Lesson } from '../content/schema'
-import { avancement } from '../srs/avancement'
+import { passage } from '../srs/avancement'
 import { cocherDevoir, progression } from '../srs/store'
 import JpText from './JpText.vue'
 
@@ -22,7 +22,7 @@ const activite = (type: string) => ACTIVITES.find((a) => a.type === type)!
       </label>
       <span v-if="d.activites.length" class="faire">
         <RouterLink v-for="t in d.activites" :key="t" :to="`/session?lecon=${lesson.id}&type=${t}`">
-          {{ activite(t).nom }} · {{ avancement(lesson, t).texte }}
+          {{ activite(t).nom }} · {{ passage(lesson, t).texte }}
         </RouterLink>
       </span>
     </li>

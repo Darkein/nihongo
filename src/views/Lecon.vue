@@ -3,7 +3,7 @@ import Chevron from '../components/Chevron.vue'
 import Devoirs from '../components/Devoirs.vue'
 import JpText from '../components/JpText.vue'
 import { ACTIVITES, devoirsDe, enTete, filigrane, lessonParId, vedette } from '../content/lessons'
-import { avancement, etatTest, lienTest } from '../srs/avancement'
+import { avancement, etatTest, lienTest, passage } from '../srs/avancement'
 import { progression } from '../srs/store'
 
 const props = defineProps<{ id: string }>()
@@ -11,7 +11,7 @@ const lesson = lessonParId(props.id)
 const lien = (type: string) => `/session?lecon=${props.id}&type=${type}`
 const enCours = (type: string) => progression.session?.retour === lien(type)
 const enDevoir = (type: string) =>
-  !!lesson && devoirsDe(lesson).some((d) => (d.activites as string[]).includes(type) && !progression.devoirs.includes(d.cle))
+  !!lesson && !progression.passages[`${lesson.id}/${type}`] && devoirsDe(lesson).some((d) => (d.activites as string[]).includes(type))
 // Circonférence de l'anneau d'avancement (rayon 26).
 const TOUR = 2 * Math.PI * 26
 </script>
@@ -41,11 +41,12 @@ const TOUR = 2 * Math.PI * 26
 
     <h2>Apprentissage</h2>
     <div class="tuiles">
-      <RouterLink v-for="a in ACTIVITES" :key="a.type" class="tuile-etat" :class="{ fait: avancement(lesson, a.type).pct === 100 }" :to="lien(a.type)">
+      <RouterLink v-for="a in ACTIVITES" :key="a.type" class="tuile-etat" :class="{ fait: passage(lesson, a.type).dernier }" :to="lien(a.type)">
         <span class="repere" aria-hidden="true">{{ a.repere }}</span>
         <b>{{ a.nom }}</b>
         <span class="ligne compte">
-          <strong>{{ avancement(lesson, a.type).fait }}<small> / {{ avancement(lesson, a.type).total }}</small></strong>
+          <strong v-if="passage(lesson, a.type).dernier">{{ passage(lesson, a.type).dernier!.justes }}<small> / {{ passage(lesson, a.type).dernier!.total }}</small></strong>
+          <strong v-else><small>{{ passage(lesson, a.type).total }} cartes</small></strong>
           <span v-if="enCours(a.type)" class="marqueur">En cours</span>
           <span v-else-if="enDevoir(a.type)" class="marqueur devoir">Devoir</span>
         </span>
