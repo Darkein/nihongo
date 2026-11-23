@@ -468,8 +468,68 @@ h2 {
   box-shadow: inset 0 0 0 2px var(--encre);
 }
 .tuile-etat.fait {
-  background: color-mix(in srgb, var(--juste) 20%, var(--fond));
-  box-shadow: inset 0 0 0 2px var(--juste);
+  background: var(--jaune-marque);
+}
+.tuile-etat.fait,
+.tuile-etat.fait small {
+  color: #111;
+}
+/* Le repère jaune disparaîtrait sur le fond jaune. */
+.tuile-etat.fait .repere {
+  color: #11111126;
+}
+/* Sous le kanji repère, pour ne pas écrire par-dessus. */
+.tuile-etat > small {
+  padding-top: 20px;
+  color: var(--doux);
+}
+/* Mini-tests blancs : une case par cours, pour voir tout le parcours d'un coup d'œil. */
+.grille-tests {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  gap: 8px;
+}
+.grille-tests a {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  aspect-ratio: 1;
+  border-radius: 14px;
+  background: var(--surface);
+  text-decoration: none;
+}
+.grille-tests b {
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1.1;
+}
+.grille-tests small {
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--doux);
+}
+.grille-tests .a-passer {
+  background: none;
+  box-shadow: inset 0 0 0 2px var(--trait);
+}
+.grille-tests .en-cours {
+  background: none;
+  box-shadow: inset 0 0 0 2px var(--encre);
+}
+.grille-tests .reussi,
+.grille-tests .reussi small {
+  color: #111;
+}
+.grille-tests .reussi {
+  background: var(--jaune-marque);
+}
+.grille-tests .a-revoir small {
+  color: var(--faux);
+}
+.tout-afficher {
+  margin-top: 12px;
+  font-weight: 700;
 }
 .tuiles + .pilule {
   margin-top: 12px;
@@ -622,7 +682,8 @@ rt {
 }
 .barre {
   height: 16px;
-  background: var(--surface);
+  /* Piste vide en contour : un fond pâle se confondait avec le filigrane de la page. */
+  box-shadow: inset 0 0 0 2px var(--encre);
   border-radius: 999px;
   overflow: hidden;
 }

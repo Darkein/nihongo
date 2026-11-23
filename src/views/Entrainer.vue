@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import Chevron from '../components/Chevron.vue'
 import EnTete from '../components/EnTete.vue'
 import { lessons, numero, toutesLesCartes } from '../content/lessons'
@@ -17,6 +17,11 @@ const max = computed(() => Math.max(1, nouvelles.value, ...boites.value))
 const NOMS = ['Demain', 'Dans 2 jours', 'Dans 4 jours', 'Dans 8 jours', 'Dans 16 jours']
 // Un mini-test blanc par cours, le plus récent en premier.
 const blancs = computed(() => [...lessons].reverse().map((l) => ({ l, ...etatTest(l.id, 'blanc') })))
+const MAX_TESTS = 8
+const tousLesTests = ref(false)
+const testsVisibles = computed(() => (tousLesTests.value ? blancs.value : blancs.value.slice(0, MAX_TESTS)))
+const classeTest = (b: { enCours?: boolean; note?: number }) =>
+  b.enCours ? 'en-cours' : b.note === undefined ? 'a-passer' : b.note >= 7 ? 'reussi' : 'a-revoir'
 </script>
 
 <template>
@@ -28,32 +33,36 @@ const blancs = computed(() => [...lessons].reverse().map((l) => ({ l, ...etatTes
   </RouterLink>
 
   <h2>Librement</h2>
-  <div class="activites">
-    <RouterLink to="/entrainer/kana">
-      <span class="corps">
-        <span class="ligne"><strong>Tous les kana</strong><Chevron /></span>
-        <small>Lecture et tracé, sans compter pour la révision</small>
-      </span>
+  <div class="tuiles">
+    <RouterLink class="tuile-etat" to="/entrainer/kana">
+      <span class="repere" lang="ja" aria-hidden="true">仮</span>
+      <b>Kana</b>
+      <small>Lecture et tracé</small>
     </RouterLink>
-    <RouterLink to="/entrainer/nombres">
-      <span class="corps">
-        <span class="ligne"><strong>Compter</strong><Chevron /></span>
-        <small>Écrire, lire et écouter les nombres, à ton niveau</small>
-      </span>
+    <RouterLink class="tuile-etat" to="/entrainer/nombres">
+      <span class="repere" lang="ja" aria-hidden="true">数</span>
+      <b>Nombres</b>
+      <small>Écrire, lire et écouter</small>
     </RouterLink>
   </div>
 
   <h2>Mini-tests blancs</h2>
-  <div class="activites">
-    <RouterLink v-for="b in blancs" :key="b.l.id" :to="lienTest(b.l.id, 'blanc')">
-      <span class="pastille">{{ numero(b.l) }}</span>
-      <span class="corps">
-        <span class="ligne"><strong>Cours {{ numero(b.l) }}</strong><span>{{ b.etat }}</span></span>
-        <small>{{ b.l.titre }}</small>
-        <small v-if="b.detail">{{ b.detail }}</small>
-      </span>
-    </RouterLink>
-  </div>
+  <ul class="grille-tests">
+    <li v-for="b in testsVisibles" :key="b.l.id">
+      <RouterLink
+        :class="classeTest(b)"
+        :to="lienTest(b.l.id, 'blanc')"
+        :aria-label="`Cours ${numero(b.l)}, ${b.l.titre} : ${b.etat}`"
+        :title="b.detail ? `${b.l.titre}. ${b.detail}` : b.l.titre"
+      >
+        <b>{{ numero(b.l) }}</b>
+        <small>{{ b.etat }}</small>
+      </RouterLink>
+    </li>
+  </ul>
+  <button v-if="blancs.length > MAX_TESTS" type="button" class="lien tout-afficher" @click="tousLesTests = !tousLesTests">
+    {{ tousLesTests ? 'Afficher moins' : `Tout afficher (${blancs.length})` }}
+  </button>
 
   <h2>Ta mémoire</h2>
   <p class="calme">Une carte réussie est revue de plus en plus tard. Une carte ratée revient le lendemain.</p>

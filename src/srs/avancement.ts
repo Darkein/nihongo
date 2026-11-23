@@ -28,14 +28,21 @@ export const noteDe = (cle: string) => {
 export const lienTest = (lessonId: string, type: 'minitest' | 'blanc') => `/session?lecon=${lessonId}&type=${type}`
 
 // Ce qu'on affiche à côté d'un test : son état, et les notes déjà obtenues pour ne pas les perdre de vue.
-export function etatTest(lessonId: string, type: 'minitest' | 'blanc'): { etat: string; detail?: string } {
+export function etatTest(
+  lessonId: string,
+  type: 'minitest' | 'blanc',
+): { etat: string; detail?: string; enCours?: boolean; note?: number } {
   const notes = progression.tests[`${lessonId}/${type}`] ?? []
   const derniere = notes.at(-1)
   if (progression.session?.retour === lienTest(lessonId, type))
-    return { etat: 'En cours', detail: derniere && `Dernière note : ${sur10(derniere)}, le ${jour(derniere.date)}` }
+    return { etat: 'En cours', enCours: true, detail: derniere && `Dernière note : ${sur10(derniere)}, le ${jour(derniere.date)}` }
   if (!derniere) return { etat: 'À passer' }
   const avant = notes.slice(0, -1).map((n) => n.note).join(' · ')
-  return { etat: sur10(derniere), detail: `Passé le ${jour(derniere.date)}` + (avant ? `, notes précédentes : ${avant}` : '') }
+  return {
+    etat: sur10(derniere),
+    note: derniere.note,
+    detail: `Passé le ${jour(derniere.date)}` + (avant ? `, notes précédentes : ${avant}` : ''),
+  }
 }
 
 // Les cartes du dernier cours passent devant : c'est lui qu'on travaille d'ici la séance suivante.
