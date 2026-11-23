@@ -8,6 +8,6 @@ defineProps<{ titre: string; sur: string; filigrane: string }>()
   <header class="entete">
     <p class="sur"><JpText :texte="sur" /></p>
     <h1>{{ titre }}</h1>
-    <span class="filigrane" aria-hidden="true">{{ filigrane }}</span>
+    <span class="filigrane" lang="ja" aria-hidden="true">{{ filigrane }}</span>
   </header>
 </template>

@@ -19,7 +19,7 @@ const TOUR = 2 * Math.PI * 26
 <template>
   <p v-if="!lesson">Leçon introuvable.</p>
   <template v-else>
-    <span class="filigrane" aria-hidden="true">{{ filigrane(lesson) }}</span>
+    <span class="filigrane" lang="ja" aria-hidden="true">{{ filigrane(lesson) }}</span>
     <RouterLink class="retour" to="/lecons"><Chevron gauche />Leçons</RouterLink>
     <header class="tete-lecon">
       <div>
