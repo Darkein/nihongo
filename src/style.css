@@ -1106,7 +1106,8 @@ h2 + .sous-titre {
   font-size: 14px;
   color: var(--doux);
 }
-.repere {
+/* Limité à la frise : les tuiles d'activité ont leur propre .repere, en filigrane. */
+.frise .repere {
   flex: none;
   display: grid;
   place-items: center;
