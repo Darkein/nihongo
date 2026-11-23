@@ -444,9 +444,9 @@ h2 {
 }
 .tuile-etat .repere {
   position: absolute;
-  top: -10px;
-  right: -8px;
-  font-size: 76px;
+  top: -8px;
+  right: -6px;
+  font-size: 60px;
   font-weight: 900;
   line-height: 1;
   pointer-events: none;
@@ -1106,7 +1106,8 @@ h2 + .sous-titre {
   font-size: 14px;
   color: var(--doux);
 }
-.repere {
+/* Limité à la frise : les tuiles d'activité ont leur propre .repere, en filigrane. */
+.frise .repere {
   flex: none;
   display: grid;
   place-items: center;
