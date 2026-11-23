@@ -8,3 +8,7 @@ import './style.css'
 watchEffect(() => (document.documentElement.dataset.theme = progression.theme))
 
 createApp(App).use(router).mount('#app')
+
+// Police des filigranes japonais : son CSS est lourd (une règle par tranche de caractères),
+// on le charge après le premier affichage pour ne pas le retarder.
+void import('@fontsource-variable/murecho')

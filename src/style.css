@@ -13,6 +13,8 @@
   /* Jaune des marques (kana, pastilles) : plus soutenu en clair pour se détacher du blanc. */
   --jaune-marque: light-dark(#e7c002, #ffd400);
   --police: 'Figtree Variable', 'Hiragino Sans', 'Noto Sans JP', 'Yu Gothic', system-ui, sans-serif;
+  /* Grands caractères japonais en fond : police embarquée pour un rendu identique partout. */
+  --police-filigrane: 'Murecho Variable', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
 }
 :root[data-theme='clair'] {
   color-scheme: light;
@@ -138,9 +140,7 @@ small {
   width: 1em;
   word-break: break-all;
   text-align: center;
-  font-size: 190px;
-  font-weight: 900;
-  line-height: 1;
+  font: 900 190px/1 var(--police-filigrane);
   pointer-events: none;
   color: light-dark(#11111112, #f5f3ee12);
 }
@@ -287,9 +287,7 @@ h2 {
   position: absolute;
   top: -12px;
   right: -6px;
-  font-size: 128px;
-  font-weight: 900;
-  line-height: 1;
+  font: 900 128px/1 var(--police-filigrane);
   pointer-events: none;
 }
 .carte-lecon {

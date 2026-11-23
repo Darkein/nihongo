@@ -11,7 +11,18 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon-16.png', 'favicon-32.png', 'apple-touch-icon.png'],
-      workbox: { globPatterns: ['**/*.{js,css,html,svg,png,woff2}'] },
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
+        // Murecho est découpée en ~120 morceaux : seuls ceux affichés sont téléchargés, puis gardés en cache.
+        globIgnores: ['**/murecho-*.woff2'],
+        runtimeCaching: [
+          {
+            urlPattern: /murecho-.*\.woff2$/,
+            handler: 'CacheFirst',
+            options: { cacheName: 'polices', expiration: { maxEntries: 150 } },
+          },
+        ],
+      },
       manifest: {
         name: 'Nihongo — révisions',
         short_name: 'Nihongo',
