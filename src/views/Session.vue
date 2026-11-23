@@ -98,6 +98,8 @@ function fini(juste: boolean) {
   if (juste) justes.value++
   if (mode !== 'libre' && !carte.value.id.startsWith('blanc/')) enregistrer(carte.value.id, juste)
   index.value++
+  // Sur petit écran, on a défilé jusqu'à la correction : la question suivante doit repartir du haut.
+  window.scrollTo(0, 0)
   memoriser()
   if (index.value === cartes.length && estTest && lesson) noterTest(`${lesson.id}/${type}`, note.value)
 }

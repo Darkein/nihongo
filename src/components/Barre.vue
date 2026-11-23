@@ -29,7 +29,8 @@ watch(
     </div>
     <div class="actions">
       <slot name="secondaire" />
-      <button ref="bouton" class="primaire" type="button" :disabled="inactif" @click="$emit('action')">{{ libelle }}</button>
+      <!-- Garder le focus dans le champ : sinon, clavier mobile ouvert, le premier appui ne fait que le fermer et la page bouge sous le doigt. -->
+      <button ref="bouton" class="primaire" type="button" :disabled="inactif" @pointerdown.prevent @click="$emit('action')">{{ libelle }}</button>
     </div>
   </div>
 </template>

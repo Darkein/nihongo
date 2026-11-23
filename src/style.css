@@ -896,6 +896,11 @@ button:disabled {
   border-radius: 20px;
   padding: 20px;
 }
+@media (max-height: 700px) {
+  .carte {
+    min-height: 9rem;
+  }
+}
 .recto {
   font-size: 1.6rem;
   font-weight: 800;
@@ -1187,11 +1192,9 @@ h2 + .sous-titre {
   background: var(--jaune-marque);
 }
 
-/* Barre d'action : toujours au même endroit, à hauteur constante */
+/* Barre d'action : en bas de l'écran, à hauteur constante. Pas collante : sur petit écran ou clavier ouvert, elle recouvrait la question et faisait trembler la page. */
 .barre-action {
   margin-top: auto;
-  position: sticky;
-  bottom: max(24px, env(safe-area-inset-bottom));
   padding: 12px 14px 14px;
   background: var(--papier);
   border: var(--trait-epais);
