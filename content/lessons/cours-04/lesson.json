@@ -102,6 +102,25 @@
     { "type": "transformation", "id": "b6-3", "serie": "練習B 6 — も : question puis réponse", "exemple": "ミラーさん・アメリカ{人|じん}、グプタさん → グプタさんも アメリカ{人|じん}ですか。……いいえ、グプタさんは アメリカ{人|じん}じゃ ありません。", "enonce": "3) タワポンさんは {学生|がくせい}です。カリナさん", "reponses": ["カリナさんも がくせいですか。はい、カリナさんも がくせいです。"] },
     { "type": "transformation", "id": "b6-4", "serie": "練習B 6 — も : question puis réponse", "exemple": "ミラーさん・アメリカ{人|じん}、グプタさん → グプタさんも アメリカ{人|じん}ですか。……いいえ、グプタさんは アメリカ{人|じん}じゃ ありません。", "enonce": "4) シュミットさんは ドイツ{人|じん}です。サントスさん", "reponses": ["サントスさんも ドイツじんですか。いいえ、サントスさんは ドイツじんじゃ ありません。"] }
   ],
+  "miniTest": [
+    { "type": "saisie", "id": "mt-hi", "question": "Écris la prononciation en rōmaji : ひ", "attendu": "romaji", "reponses": ["ひ"] },
+    { "type": "saisie", "id": "mt-mi", "question": "Écris la prononciation en rōmaji : み", "attendu": "romaji", "reponses": ["み"] },
+    { "type": "saisie", "id": "mt-bo", "question": "Écris la prononciation en rōmaji : ぼ", "attendu": "romaji", "reponses": ["ぼ"] },
+    { "type": "saisie", "id": "mt-pu", "question": "Écris la prononciation en rōmaji : ぷ", "attendu": "romaji", "reponses": ["ぷ"] },
+    { "type": "saisie", "id": "mt-mo", "question": "Écris la prononciation en rōmaji : も", "attendu": "romaji", "reponses": ["も"] },
+    { "type": "saisie", "id": "mt-kata-ha", "question": "Écris le hiragana correspondant : ハ", "reponses": ["は"] },
+    { "type": "saisie", "id": "mt-kata-pe", "question": "Écris le hiragana correspondant : ペ", "reponses": ["ぺ"] },
+    { "type": "saisie", "id": "mt-kata-ma", "question": "Écris le hiragana correspondant : マ", "reponses": ["ま"] },
+    { "type": "saisie", "id": "mt-kata-mu", "question": "Écris le hiragana correspondant : ム", "reponses": ["む"] },
+    { "type": "saisie", "id": "mt-kata-me", "question": "Écris le hiragana correspondant : メ", "reponses": ["め"] },
+    { "type": "saisie", "id": "mt-hana", "question": "Écris en rōmaji : はな (fleur, nez)", "attendu": "romaji", "reponses": ["はな"] },
+    { "type": "saisie", "id": "mt-hashi", "question": "Écris en rōmaji : はし (baguettes, pont, bout)", "attendu": "romaji", "reponses": ["はし"] },
+    { "type": "saisie", "id": "mt-hito", "question": "Écris en rōmaji : ひと (personne)", "attendu": "romaji", "reponses": ["ひと"] },
+    { "type": "saisie", "id": "mt-me", "question": "Écris en rōmaji : め (œil)", "attendu": "romaji", "reponses": ["め"] },
+    { "type": "saisie", "id": "mt-mimi", "question": "Écris en rōmaji : みみ (oreille)", "attendu": "romaji", "reponses": ["みみ"] },
+    { "type": "saisie", "id": "mt-particule-no", "question": "Complète avec の ou も : わたしは りーるだいがく（　）がくせいです。 — Je suis étudiant(e) à l'université de Lille.", "reponses": ["の"] },
+    { "type": "saisie", "id": "mt-particule-mo", "question": "Complète avec の ou も : わたしは がくせいです。— そうですか。わたし（　）がくせいです。 — Ah bon. Moi aussi, je suis étudiant(e).", "reponses": ["も"] }
+  ],
   "prochainCours": {
     "annonce": ["Les compteurs."],
     "devoirs": [
