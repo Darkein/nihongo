@@ -22,8 +22,9 @@
       ]
     },
     {
-      "titre": "Dire l'âge",
+      "titre": "Les nombres et l'âge",
       "points": [
+        "Les nombres vont jusqu'à 100 : 100 se dit ひゃく.",
         "Nombre + さい : にじゅうはっさい (28 ans). On demande なんさいですか。",
         "Exceptions : いっさい (1 an), はっさい (8 ans), じゅっさい (10 ans).",
         "20 ans se dit はたち, un mot à part.",
@@ -62,6 +63,7 @@
     { "id": "hassai", "jp": "はっさい", "fr": "8 ans" },
     { "id": "jussai", "jp": "じゅっさい", "fr": "10 ans" },
     { "id": "hatachi", "jp": "はたち", "fr": "20 ans" },
+    { "id": "hyaku", "jp": "ひゃく", "fr": "100" },
     { "id": "ichiban", "jp": "いちばん", "fr": "numéro 1 ; le meilleur" },
     { "id": "shukudai", "jp": "しゅくだい", "fr": "devoirs" },
     { "id": "seijinshiki", "jp": "せいじんしき", "fr": "cérémonie de la majorité" }
@@ -73,7 +75,7 @@
     { "nom": "タワポン", "pays": "タイ", "metier": "{学生|がくせい}", "age": 19 },
     { "nom": "シュミット", "pays": "ドイツ", "metier": "{会社員|かいしゃいん}", "age": 52 }
   ],
-  "nombres": { "compteurs": ["さい"] },
+  "nombres": { "jusqua": 100, "compteurs": ["さい"] },
   "exercices": [
     { "type": "qcm", "id": "vingt-ans", "question": "Comment dit-on « 20 ans » ?", "choix": ["にじゅっさい", "はたち", "にじゅうさい"], "reponse": 1 },
     { "type": "qcm", "id": "prefixe-o", "question": "À quoi sert le préfixe お dans おなまえ ?", "choix": ["À poser une question", "À rendre le mot plus poli", "À marquer le pluriel"], "reponse": 1 },
