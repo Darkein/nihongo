@@ -1,0 +1,102 @@
+{
+  "id": "cours-06",
+  "date": "2026-11-24",
+  "titre": "Ligne WA et ん, démonstratifs これ・それ・あれ",
+  "kana": ["わをん", "ワヲン"],
+  "resume": [
+    {
+      "titre": "Fin de la leçon 1",
+      "points": [
+        "Exercices et écoute audio de la leçon 1 (1かのまとめ) : se présenter, demander l'âge et le nom avec は・の・も・です・ですか."
+      ]
+    },
+    {
+      "titre": "Les démonstratifs こ・そ・あ・ど",
+      "points": [
+        "Le système fonctionne selon la distance : こ = près de moi (celui qui parle), そ = près de toi (celui qui écoute), あ = loin de nous deux, ど = question (« lequel ? », « où ? »).",
+        "これ : ceci (près de moi). それ : cela (près de toi). あれ : cela là-bas (loin de nous deux).",
+        "これは ほんです。 — Ceci est un livre. それは ノートです。 — Cela est un cahier.",
+        "これ・それ・あれ sont des pronoms : ils s'emploient seuls. この・その・あの, sur la même ligne du tableau, sont des adjectifs : ils se placent devant un nom (à venir).",
+        "Les colonnes du tableau : ものごと = les choses, ばしょ = le lieu, ほうこう = la direction, ようす = la manière, la description."
+      ]
+    },
+    {
+      "titre": "Fin du tableau des kana",
+      "points": [
+        "Ligne WA : わ・を / ワ・ヲ, et ん / ン.",
+        "Les mots écrits en katakana sont généralement d'origine étrangère. ラーメン s'écrit parfois らーめん : ces nouilles sont désormais bien intégrées à la cuisine japonaise.",
+        "Aucun mot japonais ne commence par を ou ん : leur entrée dans le dictionnaire est très brève.",
+        "を se prononce « o » et ne s'utilise plus que comme particule (elle marque l'objet direct, à venir)."
+      ]
+    },
+    {
+      "titre": "Prononciation : le rendaku",
+      "points": [
+        "Dans un mot composé, la première consonne du deuxième mot devient souvent sonore pour une prononciation plus fluide : c'est le rendaku (れんだく).",
+        "とけい → うでどけい (montre-bracelet), かけどけい (horloge murale).",
+        "ひと + ひと → ひとびと (les personnes). ごみ + はこ → ごみばこ (la poubelle)."
+      ]
+    }
+  ],
+  "liens": [
+    { "titre": "Les cartes de visite professionnelles (vidéo sous-titrée en français)", "url": "https://www.erin.jpf.go.jp/jp/lesson/01/let-us-try/" }
+  ],
+  "mots": [
+    { "id": "kore", "jp": "これ", "fr": "ceci (près de moi)" },
+    { "id": "sore", "jp": "それ", "fr": "cela (près de toi)" },
+    { "id": "are", "jp": "あれ", "fr": "cela là-bas (loin de nous deux)" },
+    { "id": "hon", "jp": "ほん", "fr": "livre" },
+    { "id": "jisho", "jp": "じしょ", "fr": "dictionnaire" },
+    { "id": "zasshi", "jp": "ざっし", "fr": "magazine" },
+    { "id": "shinbun", "jp": "しんぶん", "fr": "journal" },
+    { "id": "noto", "jp": "ノート", "fr": "cahier" },
+    { "id": "techo", "jp": "てちょう", "fr": "carnet, agenda de poche" },
+    { "id": "meishi", "jp": "めいし", "fr": "carte de visite" },
+    { "id": "kado", "jp": "カード", "fr": "carte" },
+    { "id": "enpitsu", "jp": "えんぴつ", "fr": "crayon" },
+    { "id": "borupen", "jp": "ボールペン", "fr": "stylo à bille" },
+    { "id": "shapupenshiru", "jp": "シャープペンシル", "fr": "porte-mine" },
+    { "id": "kagi", "jp": "かぎ", "fr": "clé" },
+    { "id": "tokei", "jp": "とけい", "fr": "montre, horloge" },
+    { "id": "kasa", "jp": "かさ", "fr": "parapluie" },
+    { "id": "kaban", "jp": "かばん", "fr": "sac, cartable" },
+    { "id": "terebi", "jp": "テレビ", "fr": "télévision" },
+    { "id": "rajio", "jp": "ラジオ", "fr": "radio" },
+    { "id": "kamera", "jp": "カメラ", "fr": "appareil photo" },
+    { "id": "konpyuta", "jp": "コンピューター", "fr": "ordinateur" },
+    { "id": "kuruma", "jp": "くるま", "fr": "voiture" },
+    { "id": "tsukue", "jp": "つくえ", "fr": "bureau (meuble)" },
+    { "id": "isu", "jp": "いす", "fr": "chaise" },
+    { "id": "chokoreto", "jp": "チョコレート", "fr": "chocolat" },
+    { "id": "kohi", "jp": "コーヒー", "fr": "café" },
+    { "id": "ramen", "jp": "ラーメン", "fr": "ramen (nouilles)" },
+    { "id": "udedokei", "jp": "うでどけい", "fr": "montre-bracelet" },
+    { "id": "kakedokei", "jp": "かけどけい", "fr": "horloge murale" },
+    { "id": "hitobito", "jp": "ひとびと", "fr": "les personnes, les gens" },
+    { "id": "gomibako", "jp": "ごみばこ", "fr": "poubelle" },
+    { "id": "basho", "jp": "ばしょ", "fr": "lieu" },
+    { "id": "hoko", "jp": "ほうこう", "fr": "direction" },
+    { "id": "yosu", "jp": "ようす", "fr": "manière, aspect" }
+  ],
+  "exercices": [
+    { "type": "qcm", "id": "pres-de-toi", "question": "L'objet est près de la personne à qui tu parles. Quel mot emploies-tu ?", "choix": ["これ", "それ", "あれ"], "reponse": 1 },
+    { "type": "qcm", "id": "loin-de-nous", "question": "L'objet est loin de vous deux. Quel mot emploies-tu ?", "choix": ["これ", "それ", "あれ"], "reponse": 2 },
+    { "type": "qcm", "id": "ko-so-a-do", "question": "Dans こ・そ・あ・ど, que marque ど ?", "choix": ["Près de moi", "Loin de nous deux", "Une question (lequel ? où ?)"], "reponse": 2 },
+    { "type": "qcm", "id": "wo-prononciation", "question": "Comment se prononce を ?", "choix": ["« wo » comme dans « water »", "« o »", "« n »"], "reponse": 1 },
+    { "type": "qcm", "id": "rendaku", "question": "Pourquoi dit-on うでどけい et non うでとけい ?", "choix": ["C'est une faute d'orthographe courante", "Dans un mot composé, la consonne du deuxième mot devient sonore (rendaku)", "とけい s'écrit en katakana dans les mots composés"], "reponse": 1 },
+    { "type": "saisie", "id": "ceci-livre", "question": "Écris en hiragana : « Ceci est un livre. »", "reponses": ["これは ほんです"] },
+    { "type": "saisie", "id": "parapluie", "question": "Écris « parapluie » en hiragana.", "reponses": ["かさ"] },
+    { "type": "saisie", "id": "crayon", "question": "Écris « crayon » en hiragana.", "reponses": ["えんぴつ"] },
+    { "type": "saisie", "id": "cela-cahier", "question": "Écris en japonais : « Cela (près de toi) est un cahier. »", "reponses": ["それは ノートです"] },
+    { "type": "tuiles", "id": "tuiles-ceci-cle", "question": "Ceci est une clé.", "tuiles": ["これは", "かぎ", "です。"], "leurres": ["それは", "あれは"] },
+    { "type": "tuiles", "id": "tuiles-la-bas-horloge", "question": "Est-ce que cela, là-bas, est une horloge ?", "tuiles": ["あれは", "とけい", "ですか。"], "leurres": ["これは", "です。"] },
+    { "type": "tuiles", "id": "tuiles-cela-sac", "question": "Cela (près de toi) est un sac.", "tuiles": ["それは", "かばん", "です。"], "leurres": ["これは", "かさ"] }
+  ],
+  "prochainCours": {
+    "annonce": ["Les petits kana comme っ ou ょ.", "Suite de la leçon 2."],
+    "devoirs": [
+      { "texte": "Relire le vocabulaire de la leçon 2 (les objets : ほん、ノート、えんぴつ、かぎ、とけい、かさ、かばん…).", "activites": ["vocabulaire"] },
+      { "texte": "Relire les phrases avec これ・それ・あれ.", "activites": ["exercices"] }
+    ]
+  }
+}
